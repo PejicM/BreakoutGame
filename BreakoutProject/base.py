@@ -77,6 +77,7 @@ class Frame:
 
 
 class Vector:
+    """Usage: setting direction for moving objects"""
     def __init__(self, x, y):
         self.x = x
         self.y = y
