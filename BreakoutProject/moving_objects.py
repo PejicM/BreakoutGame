@@ -25,7 +25,7 @@ class Ball(MovingObject):
         self.state = state
 
     def stick_to_ship(self):
-        self.chamge_state(common.BallState.Caught)
+        self.change_state(common.BallState.Caught)
 
     def move(self, x=None):
         if self.state != common.BallState.Cought:

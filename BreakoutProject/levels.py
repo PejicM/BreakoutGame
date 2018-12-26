@@ -19,13 +19,15 @@ class LevelCreator:
         width = (game_size.width - colons * common.BRICK_SIZE.width)/2
         height = 50
 
-        blocks = {}
+        blocks = set()
         for i in range(rows):
             for j in range(colons):
                 if i % 2 == 0 or j == 0 or j == 9:
                     blocks.add(LevelCreator._create_block(width, height, i, j))
 
         levels[level] = Level(level, blocks)
+
+        return levels
 
     @staticmethod
     def _create_block(width, height, i, j):

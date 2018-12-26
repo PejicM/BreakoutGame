@@ -8,13 +8,14 @@ from PyQt5.QtWidgets import (QApplication,
                             QWidget,
                             QDesktopWidget,
                             QMessageBox)
-from PyQt5.QtCore import QUrl
+from PyQt5.QtCore import QUrl, QSize
 from PyQt5.QtMultimedia import QMediaContent
 from PyQt5.QtGui import QPainter, QImage, QBrush, QPalette, QFont, QColor
 from PyQt5.QtCore import Qt, QRectF, QTimer
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaPlaylist
 
 from common import BallState, Size
+from game import GameOnePlayer, GameTwoPlayers
 
 
 class Window(QWidget):
@@ -39,10 +40,14 @@ class Window(QWidget):
         self.game_widget.mouseMoveEvent = self.mouse_move_event
         self.mouse_x = None
 
+        o_image = QImage(os.path.join('images', 'space.jpg'))
+        s_image = o_image.scaled(QSize(self.screen.width(), self.screen.height()))  # resize Image to widgets size
         palette = QPalette()
-        palette.setBrush(self.backgroundRole(),
-                         QBrush(QImage(os.path.join('images', 'space.jpg'))))
+        palette.setBrush(10, QBrush(s_image))  # 10 = Windowrole
         self.setPalette(palette)
+
+        self.game =0
+        self.painter = QPainter()
 
         self.stacked = QStackedLayout(self)
         self.stacked.addWidget(self.game_widget)
@@ -51,27 +56,109 @@ class Window(QWidget):
 
         self.showFullScreen()
 
-    def start(self):
-        pass
+    def start1(self):
+        self.game = GameOnePlayer(Size(self.width(), self.height()))
+        self.left = self.right = False
+        self.change_current_widget(self.game_widget)
+        self.started = True
+        self.timer.start(12)
+
+    def start2(self):
+        self.game = GameTwoPlayers(Size(self.width(), self.height()))
+        self.left = self.right = False
+        self.change_current_widget(self.game_widget)
+        self.started = True
+        self.timer.start(12)
+
+    def change_current_widget(self, widget):
+        self.stacked.setCurrentWidget(widget)
+        self.update()
 
     def tick(self):
+        if self.game.game_over:
+            self.try_restart()
+            self.timer.stop()
+        if self.game.won:
+            self.notify_win()
+            self.timer.stop()
+        turn_rate = 1 if self.right else -1 if self.left else 0
+        self.game.tick(turn_rate)
+        self.repaint()
+
+    def try_restart(self):
+        pass
+
+    def notify_win(self):
         pass
 
     def mouse_move_event(self, event):
         pass
 
     def quit(self):
-        reply = QMessageBox.question(self, 'Quit', 'Do you really want to quit the game?', QMessageBox.Yes | QMessageBox.No)
-        if reply == QMessageBox.Yes:
+        # reply = QMessageBox.question(self, 'Quit', 'Do you really want to quit the game?', QMessageBox.Yes | QMessageBox.No)
+        # if reply == QMessageBox.Yes:
             APP.quit()
 
     def set_main_menu(self):
-        vbox = QVBoxLayout(self.main_menu)
-        self.add_button('Start', self.start, vbox)
-        self.add_button('Quit', self.quit, vbox)
+        v_box = QVBoxLayout(self.main_menu)
+        self.add_button('One Player Game', self.start1, v_box)
+        self.add_button('Two Player Game', self.start2, v_box)
+        self.add_button('Quit', self.quit, v_box)
 
-        vbox.setAlignment(Qt.AlignCenter)
+        v_box.setAlignment(Qt.AlignCenter)
         self.stacked.addWidget(self.main_menu)
+
+    def draw_game_objects(self):
+        for entity in self.game.get_objects():
+            self.painter.drawImage(QRectF(*entity.location, entity.frame.width, entity.frame.height), QImage(entity.get_image()))
+
+    def paintEvent(self, event):
+        self.painter.begin(self)
+        self.draw()
+        self.painter.end()
+
+    def draw(self):
+        """NIJE GOTOVA METODA PASS"""
+        self.painter.setRenderHint(self.painter.Antialiasing)
+        self.painter.setFont(QFont('Times New Roman', 20))
+        self.painter.setPen(QColor('silver'))
+
+        if not self.started:
+            # neki logo
+            return
+
+        game = self.game
+
+        life_img = QImage(os.path.join('images', 'lifebonus.png')).scaled(
+            QSize(30, 30))  # resize Image to widgets size
+        draw_x = 60
+        draw_y = 30
+
+        if self.game.__class__ == GameOnePlayer:
+            self.painter.drawText(0, 20, 'Player score: %s' % str(self.game.player.score))
+
+            for _ in range(self.game.player.lives):
+                self.painter.drawImage(draw_x, draw_y, life_img)
+                draw_x -= life_img.width()
+        else:
+            self.painter.drawText(0, 20, 'Player 1 score: %s' % str(self.game.player1.score))
+            self.painter.drawText(self.screen.width() - 220, 20, 'Player 2 score: %s' % str(self.game.player2.score))
+
+            for _ in range(self.game.player1.lives):
+                self.painter.drawImage(draw_x, draw_y, life_img)
+                draw_x -= life_img.width()
+
+            draw_x = self.screen.width() - 220 + 57
+            for _ in range(self.game.player2.lives):
+                self.painter.drawImage(draw_x, draw_y, life_img)
+                draw_x -= life_img.width()
+
+        self.painter.drawLine(game.frame.left, game.border_line, game.frame.right, game.border_line)
+
+        if self.game.game_over:
+            return
+
+        #self.draw_game_elements()
 
     @staticmethod
     def add_button(text, callback, layout, alignment=Qt.AlignCenter):
@@ -81,10 +168,12 @@ class Window(QWidget):
         button.setStyleSheet(
             'QPushButton {'
             'font-size: 20px;'
-            'color: rgb(255, 215, 0);'
+            'background-color: transparent;'
+            'color: rgb(0, 0, 0);'
             '}'
             'QPushButton:focus {'
-            'background-color: rgb(0, 0, 255, 20);'
+            'opacity: 0.5;'
+            'background-color: rgba(179, 179, 255,0.3);'
             '}')
         button.setAutoDefault(True)
         layout.addWidget(button, alignment=alignment)
