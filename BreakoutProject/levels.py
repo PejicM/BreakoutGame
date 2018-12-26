@@ -15,9 +15,10 @@ class LevelCreator:
         colons = 10
         rows = 11
 
+        # LEVEL 1
         level = 1
         width = (game_size.width - colons * common.BRICK_SIZE.width)/2
-        height = 50
+        height = 80
 
         blocks = set()
         for i in range(rows):

@@ -46,7 +46,7 @@ class Window(QWidget):
         palette.setBrush(10, QBrush(s_image))  # 10 = Windowrole
         self.setPalette(palette)
 
-        self.game =0
+        self.game = 0
         self.painter = QPainter()
 
         self.stacked = QStackedLayout(self)
@@ -70,23 +70,29 @@ class Window(QWidget):
         self.started = True
         self.timer.start(12)
 
+    def restart(self):
+        reply = QMessageBox.question(self, 'Restart', 'Your score: %s. Do you want to restart?' % self.game.player.score,
+                                     QMessageBox.Yes | QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            self.start()
+        else:
+            self.change_current_widget(self.main_menu)
+
     def change_current_widget(self, widget):
         self.stacked.setCurrentWidget(widget)
         self.update()
 
     def tick(self):
         if self.game.game_over:
-            self.try_restart()
+            self.restart()
             self.timer.stop()
         if self.game.won:
             self.notify_win()
             self.timer.stop()
+
         turn_rate = 1 if self.right else -1 if self.left else 0
         self.game.tick(turn_rate)
         self.repaint()
-
-    def try_restart(self):
-        pass
 
     def notify_win(self):
         pass
@@ -108,17 +114,14 @@ class Window(QWidget):
         v_box.setAlignment(Qt.AlignCenter)
         self.stacked.addWidget(self.main_menu)
 
-    def draw_game_objects(self):
-        for entity in self.game.get_objects():
-            self.painter.drawImage(QRectF(*entity.location, entity.frame.width, entity.frame.height), QImage(entity.get_image()))
-
     def paintEvent(self, event):
         self.painter.begin(self)
         self.draw()
         self.painter.end()
 
     def draw(self):
-        """NIJE GOTOVA METODA PASS"""
+        """ Function draws all the objects inside game window
+        DODATI NEKI LOGO"""
         self.painter.setRenderHint(self.painter.Antialiasing)
         self.painter.setFont(QFont('Times New Roman', 20))
         self.painter.setPen(QColor('silver'))
@@ -158,7 +161,13 @@ class Window(QWidget):
         if self.game.game_over:
             return
 
-        #self.draw_game_elements()
+        self.draw_game_objects()
+
+    def draw_game_objects(self):
+        """Function draw all the objects in the game"""
+        for obj in self.game.get_objects():
+            self.painter.drawImage(QRectF(*obj.location, obj.frame.width, obj.frame.height),
+                                   QImage(obj.get_image()))
 
     @staticmethod
     def add_button(text, callback, layout, alignment=Qt.AlignCenter):

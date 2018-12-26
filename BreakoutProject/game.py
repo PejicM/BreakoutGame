@@ -67,7 +67,7 @@ class GameTwoPlayers:
             return True
         return False
 
-    def try_get_next_level(self):
+    def get_next_level(self):
         self.current_level += 1
         if self.current_level < len(self.levels) + 1:
             self.level = self.levels[self.current_level]
@@ -80,12 +80,12 @@ class GameTwoPlayers:
 
     def reset(self):
         self.bonuses = set()
-        self.paddle1 = Paddle((self.size.width - common.PADDLE_SIZE.width) / 2, self.size.height - common.PADDLE_SIZE.height)
-        self.paddle2 = Paddle((self.size.width - common.PADDLE_SIZE.width) / 4, self.size.height - common.PADDLE_SIZE.height)
+        self.paddle1 = Paddle(1, (self.size.width - common.PADDLE_SIZE.width) * 0.25, self.size.height - common.PADDLE_SIZE.height)
+        self.paddle2 = Paddle(2, (self.size.width - common.PADDLE_SIZE.width) * 0.75, self.size.height - common.PADDLE_SIZE.height)
         ball_x = self.paddle1.x + (self.paddle1.width - common.BALL_SIZE.width) / 2
         ball_y = self.paddle1.top - common.BALL_SIZE.height
         self.ball = Ball(ball_x, ball_y)
-        self.ball.stick_to_ship()
+        self.ball.stick_to_paddle()
 
     def kill_player(self):
         self.player1.lose_life()
@@ -126,13 +126,21 @@ class GameOnePlayer:
         for bonus in self.bonuses:
             yield bonus
 
+    def reset(self):
+        self.bonuses = set()
+        self.paddle = Paddle(1, (self.size.width - common.PADDLE_SIZE.width) / 2, self.size.height - common.PADDLE_SIZE.height)
+        ball_x = self.paddle.x + (self.paddle.width - common.BALL_SIZE.width) / 2
+        ball_y = self.paddle.top - common.BALL_SIZE.height
+        self.ball = Ball(ball_x, ball_y)
+        self.ball.stick_to_paddle()
+
     def release_ball(self):
         if self.ball.state == common.BallState.Caught:
             self.ball.change_state(common.BallState.Free)
             return True
         return False
 
-    def try_get_next_level(self):
+    def get_next_level(self):
         self.current_level += 1
         if self.current_level < len(self.levels) + 1:
             self.level = self.levels[self.current_level]
@@ -141,15 +149,86 @@ class GameOnePlayer:
         return False
 
     def tick(self, turn_rate=0):
-        pass
+        """ Promene polozaja objekata na svaki otkucaj tajmera """
+        if self.game_over or self.won:
+            return
 
-    def reset(self):
-        self.bonuses = set()
-        self.paddle = Paddle((self.size.width - common.PADDLE_SIZE.width) / 2, self.size.height - common.PADDLE_SIZE.height)
-        ball_x = self.paddle.x + (self.paddle.width - common.BALL_SIZE.width) / 2
-        ball_y = self.paddle.top - common.BALL_SIZE.height
-        self.ball = Ball(ball_x, ball_y)
-        self.ball.stick_to_ship()
+        old_x = self.paddle.left
+        self.paddle.move(turn_rate)
+        self.normalize_paddle_location()
+        self.ball.move(self.paddle.left - old_x)
+        self.reflect_ball()
+
+        if self.ball.middle > self.border_line:
+            self.kill_player()
+
+        if self.level_completed:
+            self.player.score += 100 * self.current_level
+            if not self.get_next_level():
+                self.won = True
+
+        blocks_to_remove = {block for block in self.level.blocks
+                            if block.intersects_with(self.ball)}
+        if len(blocks_to_remove) != 0:
+            self.remove_blocks(blocks_to_remove)
+
+        self.remove_bonuses()
+
+        if self.ball.contact_two_frames(self.paddle):
+            mid = self.paddle.right - self.paddle.width / 2
+            ball_mid = self.ball.right - self.ball.width / 2
+            self.ball.direction = Vector.from_angle(
+                -pi / 2 + (pi / 2.75 * (ball_mid - mid) /
+                           (self.paddle.width / 2)))
+
+    def normalize_paddle_location(self):
+        self.paddle.location = (min(max(0, self.paddle.left), self.frame.right - self.paddle.width), self.paddle.y)
+
+    def reflect_ball(self):
+        """ Odbijanje lopte, po principu menjanja smera vektora (predzaci x i y koordinate) """
+        ball = self.ball
+
+        if (ball.direction.x > 0 and ball.right > self.frame.right) or \
+                (ball.direction.x < 0 and ball.x < self.frame.left):
+            ball.direction.x = -ball.direction.x
+
+        if ball.direction.y < 0 and ball.y < self.frame.top + 0.1:
+            ball.direction.y = -ball.direction.y
+
+    def get_bonus(self, block):
+        chance = random.random()
+        if chance > 0.5:
+            random_bonus = BonusObject.get_random_bonus()
+            bonus = random_bonus(block.left, block.top)
+            self.bonuses.add(bonus)
+
+    def remove_blocks(self, blocks_to_remove):
+        block = next(iter(blocks_to_remove))
+
+        if self.ball.state != common.BallState.Fiery:
+            ball = self.ball
+            delta = ball.center - block.center
+            ball.direction.normalize()
+
+            # odbijanje lopte o blok (promena znaka odgovarajuce koordinate)
+            if abs(delta.x) - ball.velocity * abs(cos(ball.direction.x)) <= block.width / 2:
+                ball.direction.y = -ball.direction.y
+            else:
+                ball.direction.x = -ball.direction.x
+
+        self.level.blocks -= blocks_to_remove
+
+    def remove_bonuses(self):
+        bonuses_to_remove = {bonus for bonus in self.bonuses
+                             if not bonus.contact_two_frames(self)}
+
+        for bonus in self.bonuses:
+            bonus.move()
+            if bonus.contact_two_frames(self.paddle):
+                bonus.activate(self)
+                bonuses_to_remove.add(bonus)
+
+        self.bonuses -= bonuses_to_remove
 
     def kill_player(self):
         self.player.lose_life()
