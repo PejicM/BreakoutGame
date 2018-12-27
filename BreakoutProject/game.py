@@ -18,7 +18,8 @@ class Player:
         self.score = 0
 
     def gain_life(self):
-        self.lives += 1
+        if self.lives < 3:
+            self.lives += 1
 
     def lose_life(self):
         self.lives -= 1
@@ -78,7 +79,40 @@ class GameTwoPlayers:
         return False
 
     def tick(self, turn_rate=0):
-        pass
+        """ Promene polozaja objekata na svaki otkucaj tajmera"""
+        if self.game_over or self.won:
+            return
+
+        old_x = self.paddle1.left
+        self.paddle1.move(turn_rate)
+        self.normalize_paddle_location()
+        self.ball.move(self.paddle1.left - old_x)
+        self.reflect_ball()
+
+        if self.ball.middle > self.border_line:
+            self.kill_player()
+
+        if self.level_completed:
+            self.player1.score += 100 * self.current_level
+            if not self.get_next_level():
+                self.won = True
+
+        # detekcija kolizije lopte i bloka
+        blocks_to_remove = set()
+        for block in self.level.blocks:
+            if block.contact_two_frames(self.ball):
+                blocks_to_remove.add(block)
+
+        if len(blocks_to_remove) != 0:
+            self.remove_blocks(blocks_to_remove)
+
+        self.remove_bonuses()
+
+        # detekcija kolizije lopte i paddle-a, racunanje smera odbijanja lopte
+        if self.ball.contact_two_frames(self.paddle1):
+            mid = self.paddle1.right - self.paddle1.width / 2
+            ball_mid = self.ball.right - self.ball.width / 2
+            self.ball.direction = Vector.from_angle(-pi / 2 + (pi / 2.75 * (ball_mid - mid) / (self.paddle1.width / 2)))
 
     def reset(self):
         self.bonuses = set()
@@ -93,6 +127,35 @@ class GameTwoPlayers:
         self.player1.lose_life()
         self.player2.lose_life()
         self.reset()
+
+    def normalize_paddle_location(self):
+        self.paddle1.location = (min(max(0, self.paddle1.left), self.frame.right - self.paddle1.width), self.paddle1.y)
+
+    def release_ball(self):
+        if self.ball.state == common.BallState.Caught:
+            self.ball.change_state(common.BallState.Free)
+            return True
+        return False
+
+    def reflect_ball(self):
+        """ Odbijanje lopte, po principu menjanja smera vektora (predzaci x i y koordinate) """
+        ball = self.ball
+
+        if (ball.direction.x > 0 and ball.right > self.frame.right) or \
+                (ball.direction.x < 0 and ball.x < self.frame.left):
+            ball.direction.x = -ball.direction.x
+
+        if ball.direction.y < 0 and ball.y < self.frame.top + 0.1:
+            ball.direction.y = -ball.direction.y
+
+    def remove_bonuses(self):
+        bonuses_to_remove = {bonus for bonus in self.bonuses if not bonus.contact_two_frames(self)}
+
+        for bonus in self.bonuses:
+            bonus.move()
+            if bonus.contact_two_frames(self.paddle1):
+                bonus.activate(self)
+                bonuses_to_remove.add(bonus)
 
 
 class GameOnePlayer:

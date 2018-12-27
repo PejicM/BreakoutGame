@@ -22,6 +22,11 @@ class Window(QWidget):
     def __init__(self):
         super().__init__()
 
+
+class WindowOnePlayer(Window):
+    def __init__(self):
+        super().__init__()
+
         self.screen = QDesktopWidget().screenGeometry()
         self.setFixedSize(self.screen.width(), self.screen.height() - 70)
         self.move(0, 0)
@@ -37,7 +42,6 @@ class Window(QWidget):
         self.main_menu = QWidget(self)
         self.game_widget = QWidget(self)
         self.game_widget.setMouseTracking(True)
-        self.game_widget.mouseMoveEvent = self.mouse_move_event
         self.mouse_x = None
 
         o_image = QImage(os.path.join('images', 'space.jpg'))
@@ -95,13 +99,13 @@ class Window(QWidget):
         self.repaint()
 
     def notify_win(self):
-        pass
-
-    def mouse_move_event(self, event):
-        pass
+        QMessageBox.information(self, 'Win', 'You win. Your score: %s'
+                                % self.game.player.score)
+        self.started = False
+        self.change_current_widget(self.main_menu)
 
     def quit(self):
-            APP.quit()
+        APP.quit()
 
     def set_main_menu(self):
         v_box = QVBoxLayout(self.main_menu)
@@ -229,6 +233,6 @@ class Window(QWidget):
 
 if __name__ == '__main__':
     APP = QApplication(sys.argv)
-    WINDOW = Window()
+    WINDOW = WindowOnePlayer()
     APP.setOverrideCursor(Qt.BlankCursor)
     APP.exec_()
