@@ -74,7 +74,7 @@ class Window(QWidget):
         reply = QMessageBox.question(self, 'Restart', 'Your score: %s. Do you want to restart?' % self.game.player.score,
                                      QMessageBox.Yes | QMessageBox.No)
         if reply == QMessageBox.Yes:
-            self.start()
+            self.start1()
         else:
             self.change_current_widget(self.main_menu)
 
@@ -101,8 +101,6 @@ class Window(QWidget):
         pass
 
     def quit(self):
-        # reply = QMessageBox.question(self, 'Quit', 'Do you really want to quit the game?', QMessageBox.Yes | QMessageBox.No)
-        # if reply == QMessageBox.Yes:
             APP.quit()
 
     def set_main_menu(self):
@@ -113,6 +111,46 @@ class Window(QWidget):
 
         v_box.setAlignment(Qt.AlignCenter)
         self.stacked.addWidget(self.main_menu)
+
+    def mousePressEvent(self, event):
+        self.game.release_ball()
+
+    def keyPressEvent(self, event):
+        """
+            SPACE -> release ball
+            ESC   -> pause
+            P     -> pause/continue
+            Q     -> quit
+        """
+        key = event.key()
+        self.left = key == Qt.Key_Left
+        self.right = key == Qt.Key_Right
+
+        if key == Qt.Key_Space:
+            self.game.release_ball()
+
+        if key == Qt.Key_Escape:
+            self.timer.stop()
+            self.started = False
+            self.change_current_widget(self.main_menu)
+
+        if key == Qt.Key_P:
+            self.paused = not self.paused
+            if self.paused:
+                self.timer.stop()
+            else:
+                self.timer.start()
+
+        if key == Qt.Key_Q:
+            self.quit()
+
+    def keyReleaseEvent(self, event):
+        key = event.key()
+
+        if key == Qt.Key_Left:
+            self.left = False
+        elif key == Qt.Key_Right:
+            self.right = False
 
     def paintEvent(self, event):
         self.painter.begin(self)

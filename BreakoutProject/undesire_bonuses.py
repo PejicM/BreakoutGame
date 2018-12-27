@@ -6,7 +6,7 @@ class ShrinkBonus(BonusObject):
         super().__init__(x, y)
 
     def activate(self, game):
-        game.ship.narrow()
+        game.paddle.shrink()
 
 
 class FastBallBonus(BonusObject):

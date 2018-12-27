@@ -12,7 +12,7 @@ class Paddle(MovingObject):
         return os.path.join('images', '%s.png' % (type(self).__name__.lower() + str(self.paddle_id)))
 
     def expand(self):
-        self.frame = self.frame.transform(-self.frame.width / 2, 0, int(self.frame.width / 2, 0))
+        self.frame = self.frame.transform(-self.frame.width / 2, 0, int(self.frame.width / 2), 0)
 
     def shrink(self):
         self.frame = self.frame.transform(self.frame.width / 2, 0, -int(self.frame.width / 2), 0)
@@ -32,16 +32,19 @@ class Ball(MovingObject):
         self.change_state(common.BallState.Caught)
 
     def move(self, x=None):
-        if self.state != common.BallState.Cought:
+        if self.state != common.BallState.Caught:
             super().move()
         else:
             self.frame = self.frame.relocate(x, 0)
 
     def accelerate(self):
-        self.velocity = 1.5*common.BALL_VELOCITY
+        self.velocity = 1.2 * common.BALL_VELOCITY
+
+    def reset_accelerate(self):
+        self.velocity = common.BALL_VELOCITY
 
     def get_image(self):
         if self.state != common.BallState.Powerful:
-            return  super().get_image()
+            return super().get_image()
         else:
-            return os.path.join('images', 'fireball_bonus.png')
+            return os.path.join('images', 'fireballbonus.png')

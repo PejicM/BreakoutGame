@@ -6,6 +6,8 @@ from abstract_objects import BonusObject
 from moving_objects import Ball, Paddle
 from base import Frame, Vector
 from levels import LevelCreator
+from desire_bonuses import ExpandBonus, FireballBonus, LifeBonus
+from undesire_bonuses import ShrinkBonus, DeathBonus, FastBallBonus
 
 
 class Player:
@@ -132,6 +134,7 @@ class GameOnePlayer:
         ball_x = self.paddle.x + (self.paddle.width - common.BALL_SIZE.width) / 2
         ball_y = self.paddle.top - common.BALL_SIZE.height
         self.ball = Ball(ball_x, ball_y)
+        self.ball.reset_accelerate()
         self.ball.stick_to_paddle()
 
     def release_ball(self):
@@ -145,11 +148,12 @@ class GameOnePlayer:
         if self.current_level < len(self.levels) + 1:
             self.level = self.levels[self.current_level]
             self.reset()
+
             return True
         return False
 
     def tick(self, turn_rate=0):
-        """ Promene polozaja objekata na svaki otkucaj tajmera """
+        """ Promene polozaja objekata na svaki otkucaj tajmera"""
         if self.game_over or self.won:
             return
 
@@ -167,19 +171,22 @@ class GameOnePlayer:
             if not self.get_next_level():
                 self.won = True
 
-        blocks_to_remove = {block for block in self.level.blocks
-                            if block.intersects_with(self.ball)}
+        # detekcija kolizije lopte i bloka
+        blocks_to_remove = set()
+        for block in self.level.blocks:
+            if block.contact_two_frames(self.ball):
+                blocks_to_remove.add(block)
+
         if len(blocks_to_remove) != 0:
             self.remove_blocks(blocks_to_remove)
 
         self.remove_bonuses()
 
+        # detekcija kolizije lopte i paddle-a, racunanje smera odbijanja lopte
         if self.ball.contact_two_frames(self.paddle):
             mid = self.paddle.right - self.paddle.width / 2
             ball_mid = self.ball.right - self.ball.width / 2
-            self.ball.direction = Vector.from_angle(
-                -pi / 2 + (pi / 2.75 * (ball_mid - mid) /
-                           (self.paddle.width / 2)))
+            self.ball.direction = Vector.from_angle(-pi / 2 + (pi / 2.75 * (ball_mid - mid) / (self.paddle.width / 2)))
 
     def normalize_paddle_location(self):
         self.paddle.location = (min(max(0, self.paddle.left), self.frame.right - self.paddle.width), self.paddle.y)
@@ -197,15 +204,28 @@ class GameOnePlayer:
 
     def get_bonus(self, block):
         chance = random.random()
-        if chance > 0.5:
+        if chance > 0.7:
             random_bonus = BonusObject.get_random_bonus()
-            bonus = random_bonus(block.left, block.top)
+
+            if random_bonus == common.Bonuses.DecreaseBonus:
+                bonus = ShrinkBonus(block.left, block.top)
+            elif random_bonus == common.Bonuses.ExpandBonus:
+                bonus = ExpandBonus(block.left, block.top)
+            elif random_bonus == common.Bonuses.FireBallBonus:
+                bonus = FireballBonus(block.left, block.top)
+            elif random_bonus == common.Bonuses.FastBallBonus:
+                bonus = FastBallBonus(block.left, block.top)
+            elif random_bonus == common.Bonuses.LifeBonus:
+                bonus = LifeBonus(block.left, block.top)
+            elif random_bonus == common.Bonuses.DeathBonus:
+                bonus = DeathBonus(block.left, block.top)
+
             self.bonuses.add(bonus)
 
     def remove_blocks(self, blocks_to_remove):
         block = next(iter(blocks_to_remove))
 
-        if self.ball.state != common.BallState.Fiery:
+        if self.ball.state != common.BallState.Powerful:
             ball = self.ball
             delta = ball.center - block.center
             ball.direction.normalize()
@@ -218,9 +238,14 @@ class GameOnePlayer:
 
         self.level.blocks -= blocks_to_remove
 
+        # dodela bonusa (moguca, zavisi od random vrednosti)
+        self.get_bonus(block)
+
+        # dodela bodova
+        self.player.get_score(len(blocks_to_remove))
+
     def remove_bonuses(self):
-        bonuses_to_remove = {bonus for bonus in self.bonuses
-                             if not bonus.contact_two_frames(self)}
+        bonuses_to_remove = {bonus for bonus in self.bonuses if not bonus.contact_two_frames(self)}
 
         for bonus in self.bonuses:
             bonus.move()
