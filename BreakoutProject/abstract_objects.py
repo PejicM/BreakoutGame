@@ -90,7 +90,7 @@ class BonusObject(MovingObject):
     def __init__(self, x, y):
         super().__init__(x, y, common.BONUS_SIZE, common.BONUS_VELOCITY, common.BONUS_DIRECTION)
 
-    def activate(self, game):
+    def activate(self, game, paddle_flag=0):
         pass
 
     @staticmethod

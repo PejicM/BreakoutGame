@@ -17,6 +17,8 @@ from PyQt5.QtMultimedia import QMediaPlayer, QMediaPlaylist
 from common import BallState, Size
 from game import GameOnePlayer, GameTwoPlayers
 
+from key_notifier import KeyNotifier
+
 
 class Window(QWidget):
     def __init__(self):
@@ -31,10 +33,16 @@ class WindowOnePlayer(Window):
         self.setFixedSize(self.screen.width(), self.screen.height() - 70)
         self.move(0, 0)
 
+        self.game_mode = 1              # indikator da li se igra sa jednim ili dva igraca
+
         self.started = False
         self.paused = False
-        self.left = False
-        self.right = False
+
+        self.left1 = False
+        self.right1 = False
+        self.left2 = False
+        self.right2 = False
+
         self.timer = QTimer()
         self.timer.timeout.connect(self.tick)
         self.setWindowTitle('Breakout')
@@ -43,6 +51,10 @@ class WindowOnePlayer(Window):
         self.game_widget = QWidget(self)
         self.game_widget.setMouseTracking(True)
         self.mouse_x = None
+
+        self.key_notifier = KeyNotifier()
+        self.key_notifier.key_signal.connect(self.__update_position__)
+        self.key_notifier.start()
 
         o_image = QImage(os.path.join('images', 'space.jpg'))
         s_image = o_image.scaled(QSize(self.screen.width(), self.screen.height()))  # resize Image to widgets size
@@ -62,21 +74,29 @@ class WindowOnePlayer(Window):
 
     def start1(self):
         self.game = GameOnePlayer(Size(self.width(), self.height()))
-        self.left = self.right = False
+        self.left1 = self.right1 = False
         self.change_current_widget(self.game_widget)
         self.started = True
         self.timer.start(12)
 
     def start2(self):
         self.game = GameTwoPlayers(Size(self.width(), self.height()))
-        self.left = self.right = False
+        self.left1 = self.right1 = False
+        self.left2 = self.right2 = False
         self.change_current_widget(self.game_widget)
         self.started = True
         self.timer.start(12)
 
     def restart(self):
-        reply = QMessageBox.question(self, 'Restart', 'Your score: %s. Do you want to restart?' % self.game.player.score,
+        if self.game_mode == 1:
+            reply = QMessageBox.question(self, 'Restart', 'Your score: %s. Do you want to restart?' % self.game.player.score,
                                      QMessageBox.Yes | QMessageBox.No)
+        else:
+            reply = QMessageBox.question(self, 'Restart',
+                                         'Player 1 score: %s.' % self.game.player1.score,
+                                         'Player 2 score: %s.' % self.game.player2.score,
+                                         QMessageBox.Yes | QMessageBox.No)
+
         if reply == QMessageBox.Yes:
             self.start1()
         else:
@@ -94,13 +114,23 @@ class WindowOnePlayer(Window):
             self.notify_win()
             self.timer.stop()
 
-        turn_rate = 1 if self.right else -1 if self.left else 0
-        self.game.tick(turn_rate)
+        if self.game_mode == 1:
+            turn_rate = 1 if self.right1 else -1 if self.left1 else 0
+            self.game.tick(turn_rate)
+        else:
+            turn_rate1 = 1 if self.right1 else -1 if self.left1 else 0
+            turn_rate2 = 1 if self.right2 else -1 if self.left2 else 0
+            self.game.tick(turn_rate1, turn_rate2)
+
         self.repaint()
 
     def notify_win(self):
-        QMessageBox.information(self, 'Win', 'You win. Your score: %s'
-                                % self.game.player.score)
+        if self.game_mode == 1:
+            QMessageBox.information(self, 'Win', 'You win. Your score: %s'
+                                    % self.game.player.score)
+        else:
+            QMessageBox.information(self, 'Win', 'You win. Player 1 score: %s' % self.game.player1.score,
+                                    'Player 2 score: %s' % self.game.player2.score)
         self.started = False
         self.change_current_widget(self.main_menu)
 
@@ -116,8 +146,8 @@ class WindowOnePlayer(Window):
         v_box.setAlignment(Qt.AlignCenter)
         self.stacked.addWidget(self.main_menu)
 
-    def mousePressEvent(self, event):
-        self.game.release_ball()
+    #def mousePressEvent(self, event):
+        #self.game.release_ball()
 
     def keyPressEvent(self, event):
         """
@@ -125,10 +155,19 @@ class WindowOnePlayer(Window):
             ESC   -> pause
             P     -> pause/continue
             Q     -> quit
+            One player game -> moving on arrows
+            Two player game -> moving on ASDW and arrows
         """
         key = event.key()
-        self.left = key == Qt.Key_Left
-        self.right = key == Qt.Key_Right
+        self.key_notifier.add_key(event.key())
+        if self.game_mode == 1:
+            self.left1 = key == Qt.Key_Left
+            self.right1 = key == Qt.Key_Right
+        else:
+            self.left1 = key == Qt.Key_A
+            self.right1 = key == Qt.Key_D
+            self.left2 = key == Qt.Key_Left
+            self.right2 = key == Qt.Key_Right
 
         if key == Qt.Key_Space:
             self.game.release_ball()
@@ -150,11 +189,36 @@ class WindowOnePlayer(Window):
 
     def keyReleaseEvent(self, event):
         key = event.key()
+        self.key_notifier.rem_key(event.key())
+        if self.game_mode == 1:
+            if key == Qt.Key_Left:
+                self.left1 = False
+            elif key == Qt.Key_Right:
+                self.right1 = False
+        else:
+            if key == Qt.Key_A:
+                self.left1 = False
+            elif key == Qt.Key_D:
+                self.right1 = False
+            elif key == Qt.Key_Left:
+                self.left2 = False
+            elif key == Qt.Key_Right:
+                self.right2 = False
 
-        if key == Qt.Key_Left:
-            self.left = False
-        elif key == Qt.Key_Right:
-            self.right = False
+    def __update_position__(self, key):
+        if key == Qt.Key_Right:
+            self.game.paddle2.move(1)
+            self.game.normalize_paddle_location()
+        elif key == Qt.Key_Left:
+            self.game.paddle2.move(-1)
+            self.game.normalize_paddle_location()
+
+        if key == Qt.Key_D:
+            self.game.paddle1.move(1)
+            self.game.normalize_paddle_location()
+        elif key == Qt.Key_A:
+            self.game.paddle1.move(-1)
+            self.game.normalize_paddle_location()
 
     def paintEvent(self, event):
         self.painter.begin(self)
@@ -180,12 +244,14 @@ class WindowOnePlayer(Window):
         draw_y = 30
 
         if self.game.__class__ == GameOnePlayer:
+            self.game_mode = 1
             self.painter.drawText(0, 20, 'Player score: %s' % str(self.game.player.score))
 
             for _ in range(self.game.player.lives):
                 self.painter.drawImage(draw_x, draw_y, life_img)
                 draw_x -= life_img.width()
         else:
+            self.game_mode = 2
             self.painter.drawText(0, 20, 'Player 1 score: %s' % str(self.game.player1.score))
             self.painter.drawText(self.screen.width() - 220, 20, 'Player 2 score: %s' % str(self.game.player2.score))
 
