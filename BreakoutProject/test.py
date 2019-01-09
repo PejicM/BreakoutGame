@@ -92,8 +92,8 @@ class Window(QWidget):
                                      QMessageBox.Yes | QMessageBox.No)
         else:
             reply = QMessageBox.question(self, 'Restart',
-                                         'Player 1 score: %s.' % self.game.player1.score,
-                                         'Player 2 score: %s.' % self.game.player2.score,
+                                         'Player 1 score: %s.\nPlayer 2 score: %s.'
+                                         % (self.game.player1.score, self.game.player2.score),
                                          QMessageBox.Yes | QMessageBox.No)
 
         if reply == QMessageBox.Yes:
@@ -213,19 +213,49 @@ class Window(QWidget):
                 self.right2 = False
 
     def __update_position__(self, key):
-        if key == Qt.Key_Right:
-            self.game.paddle2.move(1)
-            self.game.normalize_paddle_location()
-        elif key == Qt.Key_Left:
-            self.game.paddle2.move(-1)
-            self.game.normalize_paddle_location()
+        if self.game_mode == 1:
+            if key == Qt.Key_Right:
+                old_x1 = self.game.paddle.left
+                self.game.paddle.move(1)
+                self.game.normalize_paddle_location()
+                # pomeranje lopte
+                if self.game.ball.state == BallState.Caught:
+                    self.game.ball.move(self.game.paddle1.left - old_x1)
+                    self.game.reflect_ball()
 
-        if key == Qt.Key_D:
-            self.game.paddle1.move(1)
-            self.game.normalize_paddle_location()
-        elif key == Qt.Key_A:
-            self.game.paddle1.move(-1)
-            self.game.normalize_paddle_location()
+            elif key == Qt.Key_Left:
+                old_x1 = self.game.paddle.left
+                self.game.paddle.move(-1)
+                self.game.normalize_paddle_location()
+                # pomeranje lopte
+                if self.game.ball.state == BallState.Caught:
+                    self.game.ball.move(self.game.paddle1.left - old_x1)
+                    self.game.reflect_ball()
+
+        if self.game_mode == 2:
+            if key == Qt.Key_Right:
+                self.game.paddle2.move(1)
+                self.game.normalize_paddle_location()
+            elif key == Qt.Key_Left:
+                self.game.paddle2.move(-1)
+                self.game.normalize_paddle_location()
+
+            if key == Qt.Key_D:
+                old_x1 = self.game.paddle1.left
+                self.game.paddle1.move(1)
+                self.game.normalize_paddle_location()
+                # pomeranje lopte
+                if self.game.ball.state == BallState.Caught:
+                    self.game.ball.move(self.game.paddle1.left - old_x1)
+                    self.game.reflect_ball()
+            elif key == Qt.Key_A:
+                old_x1 = self.game.paddle1.left
+                self.game.paddle1.move(-1)
+                self.game.normalize_paddle_location()
+                # pomeranje lopte
+                if self.game.ball.state == BallState.Caught:
+                    self.game.ball.move(self.game.paddle1.left - old_x1)
+                    self.game.reflect_ball()
 
     def paintEvent(self, event):
         self.painter.begin(self)

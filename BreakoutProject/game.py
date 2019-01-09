@@ -48,7 +48,7 @@ class GameTwoPlayers:
 
     @property
     def game_over(self):
-        return Player.lives == 0
+        return self.player1.lives == 0 and self.player2.lives == 0
 
     @property
     def level_completed(self):
@@ -311,6 +311,7 @@ class GameOnePlayer:
 
     def tick(self, turn_rate=0):
         """ Promene polozaja objekata na svaki otkucaj tajmera"""
+
         if self.game_over or self.won:
             return
 

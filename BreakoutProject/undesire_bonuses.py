@@ -27,9 +27,4 @@ class DeathBonus(BonusObject):
         super().__init__(x, y)
 
     def activate(self, game, paddle_flag=0):
-        if paddle_flag == 1:
-            game.player1.lives -= 1
-        elif paddle_flag == 2:
-            game.player2.lives -= 1
-        else:
             game.kill_player()

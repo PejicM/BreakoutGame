@@ -30,7 +30,9 @@ class LifeBonus(BonusObject):
     def activate(self, game, paddle_flag=0):
         if paddle_flag == 1:
             game.player1.gain_life()
+            game.player2.gain_life()
         elif paddle_flag == 2:
+            game.player1.gain_life()
             game.player2.gain_life()
         else:
             game.player.gain_life()
