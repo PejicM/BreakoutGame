@@ -1,6 +1,7 @@
 import random
 import common
 from math import pi, cos
+from multiprocessing import Queue
 
 from abstract_objects import BonusObject
 from moving_objects import Ball, Paddle
@@ -11,7 +12,7 @@ from undesire_bonuses import ShrinkBonus, DeathBonus, FastBallBonus
 
 
 class Player:
-    lives = 3       # static field
+    lives = 3  # static field
 
     def __init__(self, player_id):
         self.player_id = player_id
@@ -30,18 +31,17 @@ class Player:
 
 
 class GameTwoPlayers:
-    """TREBACE DVA PADDLE-a, DVA IGRACA, itd....."""
     def __init__(self, size):
         self.size = size
         self.frame = Frame(0, 0, *size)
 
         self.player1 = Player(1)
         self.player2 = Player(2)
-        self.paddle_reflect_ball = 1        # indikator koji paddle je odbio loptu i eventualno pogodio neki blok
+        self.paddle_reflect_ball = 1  # indikator koji paddle je odbio loptu i eventualno pogodio neki blok
         self.current_level = 1
         self.won = False
         self.reset()
-        self.border_line = self.paddle1.bottom - self.paddle1.frame.height / 2        # granicka linija ispod koje loptica ne sme pasti
+        self.border_line = self.paddle1.bottom - self.paddle1.frame.height / 2  # granicka linija ispod koje loptica ne sme pasti
 
         self.levels = LevelCreator.get_levels(size)
         self.level = self.levels[self.current_level]
@@ -66,11 +66,24 @@ class GameTwoPlayers:
         for bonus2 in self.player2.bonuses:
             yield bonus2
 
+        """q.put(self.paddle1)
+        q.put(self.paddle2)
+        q.put(self.ball)
+
+        for block in self.level.blocks:
+            q.put(block)
+        for bonus1 in self.player1.bonuses:
+            q.put(bonus1)
+        for bonus2 in self.player2.bonuses:
+            q.put(bonus2)"""
+
     def reset(self):
         self.player1.bonuses = set()
         self.player2.bonuses = set()
-        self.paddle1 = Paddle(1, (self.size.width - common.PADDLE_SIZE.width) * 0.25, self.size.height - common.PADDLE_SIZE.height)
-        self.paddle2 = Paddle(2, (self.size.width - common.PADDLE_SIZE.width) * 0.75, self.size.height - common.PADDLE_SIZE.height)
+        self.paddle1 = Paddle(1, (self.size.width - common.PADDLE_SIZE.width) * 0.25,
+                              self.size.height - common.PADDLE_SIZE.height)
+        self.paddle2 = Paddle(2, (self.size.width - common.PADDLE_SIZE.width) * 0.75,
+                              self.size.height - common.PADDLE_SIZE.height)
         ball_x = self.paddle1.x + (self.paddle1.width - common.BALL_SIZE.width) / 2
         ball_y = self.paddle1.top - common.BALL_SIZE.height
         self.ball = Ball(ball_x, ball_y)
@@ -97,12 +110,12 @@ class GameTwoPlayers:
 
         # pomeranje paddle-ova
         old_x1 = self.paddle1.left
-        #self.paddle1.move(turn_rate1)
+        # self.paddle1.move(turn_rate1)
 
-        #old_x2 = self.paddle2.left
-        #self.paddle2.move(turn_rate2)
+        # old_x2 = self.paddle2.left
+        # self.paddle2.move(turn_rate2)
 
-        #self.normalize_paddle_location()
+        # self.normalize_paddle_location()
 
         # pomeranje lopte
         self.ball.move(self.paddle1.left - old_x1)
@@ -242,7 +255,7 @@ class GameOnePlayer:
         self.current_level = 1
         self.won = False
         self.reset()
-        self.border_line = self.paddle.bottom - self.paddle.frame.height / 2        # granicka linija ispod koje loptica ne sme pasti
+        self.border_line = self.paddle.bottom - self.paddle.frame.height / 2  # granicka linija ispod koje loptica ne sme pasti
 
         self.levels = LevelCreator.get_levels(size)
         self.level = self.levels[self.current_level]
@@ -266,7 +279,8 @@ class GameOnePlayer:
 
     def reset(self):
         self.player.bonuses = set()
-        self.paddle = Paddle(1, (self.size.width - common.PADDLE_SIZE.width) / 2, self.size.height - common.PADDLE_SIZE.height)
+        self.paddle = Paddle(1, (self.size.width - common.PADDLE_SIZE.width) / 2,
+                             self.size.height - common.PADDLE_SIZE.height)
         ball_x = self.paddle.x + (self.paddle.width - common.BALL_SIZE.width) / 2
         ball_y = self.paddle.top - common.BALL_SIZE.height
         self.ball = Ball(ball_x, ball_y)

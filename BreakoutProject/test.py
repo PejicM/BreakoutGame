@@ -13,6 +13,7 @@ from PyQt5.QtMultimedia import QMediaContent
 from PyQt5.QtGui import QPainter, QImage, QBrush, QPalette, QFont, QColor
 from PyQt5.QtCore import Qt, QRectF, QTimer
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaPlaylist
+from multiprocessing import Process, Queue
 
 from common import BallState, Size
 from game import GameOnePlayer, GameTwoPlayers
@@ -21,11 +22,6 @@ from key_notifier import KeyNotifier
 
 
 class Window(QWidget):
-    def __init__(self):
-        super().__init__()
-
-
-class WindowOnePlayer(Window):
     def __init__(self):
         super().__init__()
 
@@ -226,8 +222,7 @@ class WindowOnePlayer(Window):
         self.painter.end()
 
     def draw(self):
-        """ Function draws all the objects inside game window
-        DODATI NEKI LOGO"""
+        """ Function draws all the objects inside game window """
         self.painter.setRenderHint(self.painter.Antialiasing)
         self.painter.setFont(QFont('Times New Roman', 20))
         self.painter.setPen(QColor('silver'))
@@ -238,8 +233,7 @@ class WindowOnePlayer(Window):
 
         game = self.game
 
-        life_img = QImage(os.path.join('images', 'lifebonus.png')).scaled(
-            QSize(30, 30))  # resize Image to widgets size
+        life_img = QImage(os.path.join('images', 'lifebonus.png')).scaled(QSize(30, 30))  # resize Image to widgets size
         draw_x = 60
         draw_y = 30
 
@@ -277,6 +271,17 @@ class WindowOnePlayer(Window):
             self.painter.drawImage(QRectF(*obj.location, obj.frame.width, obj.frame.height),
                                    QImage(obj.get_image()))
 
+        """q = Queue()
+
+        major_proc = Process(target=self.game.get_objects, args=[q])
+        major_proc.start()
+
+        for _ in range(0, q.qsize()):
+            obj = q.get()
+            self.painter.drawImage(QRectF(*obj.location, obj.frame.width, obj.frame.height),
+                                   QImage(obj.get_image()))"""
+
+
     @staticmethod
     def add_button(text, callback, layout, alignment=Qt.AlignCenter):
         button = QPushButton(text)
@@ -299,6 +304,6 @@ class WindowOnePlayer(Window):
 
 if __name__ == '__main__':
     APP = QApplication(sys.argv)
-    WINDOW = WindowOnePlayer()
+    WINDOW = Window()
     APP.setOverrideCursor(Qt.BlankCursor)
     APP.exec_()
