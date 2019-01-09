@@ -25,11 +25,16 @@ class Window(QWidget):
     def __init__(self):
         super().__init__()
 
+        #self.queue = queue
+        self.init_ui()
+        self.showFullScreen()
+
+    def init_ui(self):
         self.screen = QDesktopWidget().screenGeometry()
         self.setFixedSize(self.screen.width(), self.screen.height() - 70)
         self.move(0, 0)
 
-        self.game_mode = 1              # indikator da li se igra sa jednim ili dva igraca
+        self.game_mode = 1  # indikator da li se igra sa jednim ili dva igraca
 
         self.started = False
         self.paused = False
@@ -66,8 +71,6 @@ class Window(QWidget):
         self.set_main_menu()
         self.stacked.setCurrentWidget(self.main_menu)
 
-        self.showFullScreen()
-
     def start1(self):
         self.game = GameOnePlayer(Size(self.width(), self.height()))
         self.left1 = self.right1 = False
@@ -101,6 +104,14 @@ class Window(QWidget):
     def change_current_widget(self, widget):
         self.stacked.setCurrentWidget(widget)
         self.update()
+
+    def listen(self):
+        while True:
+            num = self.queue.get()
+            print("got {0}".format(num))
+            self.pbar.setValue(num)
+            if num == 100:
+                break
 
     def tick(self):
         if self.game.game_over:
@@ -228,7 +239,6 @@ class Window(QWidget):
         self.painter.setPen(QColor('silver'))
 
         if not self.started:
-            # neki logo
             return
 
         game = self.game
@@ -263,6 +273,24 @@ class Window(QWidget):
         if self.game.game_over:
             return
 
+        """
+        JAKO SPORO I GLUPO, MORAS VRATITI GET_OBJECTS NA STARO I OBRISATI OVO
+        
+        queue = Queue()
+        proc_ball = Process(target=self.game.get_ball, args=[queue])
+        proc_paddle = Process(target=self.game.get_paddle, args=[queue])
+
+        proc_ball.start()
+        proc_paddle.start()
+        
+        proc_ball.join()
+        proc_paddle.join()
+
+        for _ in range(queue.qsize()):
+            obj = queue.get()
+            self.painter.drawImage(QRectF(*obj.location, obj.frame.width, obj.frame.height),
+                                   QImage(obj.get_image()))"""
+
         self.draw_game_objects()
 
     def draw_game_objects(self):
@@ -270,17 +298,6 @@ class Window(QWidget):
         for obj in self.game.get_objects():
             self.painter.drawImage(QRectF(*obj.location, obj.frame.width, obj.frame.height),
                                    QImage(obj.get_image()))
-
-        """q = Queue()
-
-        major_proc = Process(target=self.game.get_objects, args=[q])
-        major_proc.start()
-
-        for _ in range(0, q.qsize()):
-            obj = q.get()
-            self.painter.drawImage(QRectF(*obj.location, obj.frame.width, obj.frame.height),
-                                   QImage(obj.get_image()))"""
-
 
     @staticmethod
     def add_button(text, callback, layout, alignment=Qt.AlignCenter):

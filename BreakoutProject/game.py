@@ -54,6 +54,13 @@ class GameTwoPlayers:
     def level_completed(self):
         return len(self.level.blocks) == 0
 
+    def get_paddle(self, queue: Queue):
+        queue.put(self.paddle1)
+        queue.put(self.paddle2)
+
+    def get_ball(self, queue: Queue):
+        queue.put(self.ball)
+
     def get_objects(self):
         yield self.paddle1
         yield self.paddle2
