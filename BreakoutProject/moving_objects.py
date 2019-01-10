@@ -12,10 +12,12 @@ class Paddle(MovingObject):
         return os.path.join('images', '%s.png' % (type(self).__name__.lower() + str(self.paddle_id)))
 
     def expand(self):
-        self.frame = self.frame.transform(-self.frame.width / 2, 0, int(self.frame.width / 2), 0)
+        if self.frame.width < common.PADDLE_SIZE.width*2:
+            self.frame = self.frame.transform(-self.frame.width / 2, 0, int(self.frame.width / 2), 0)
 
     def shrink(self):
-        self.frame = self.frame.transform(self.frame.width / 2, 0, -int(self.frame.width / 2), 0)
+        if self.frame.width > common.PADDLE_SIZE.width / 2:
+            self.frame = self.frame.transform(self.frame.width / 2, 0, -int(self.frame.width / 2), 0)
 
 
 class Ball(MovingObject):

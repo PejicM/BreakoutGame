@@ -12,6 +12,7 @@ from base import Frame, Vector
 from levels import LevelCreator
 from desire_bonuses import ExpandBonus, FireballBonus, LifeBonus
 from undesire_bonuses import ShrinkBonus, DeathBonus, FastBallBonus
+from threading import Thread
 
 
 class Player:
@@ -34,10 +35,11 @@ class Player:
 
 
 class GameTwoPlayers:
-    def __init__(self, size):
+    def __init__(self, size, q1: Queue, q2: Queue):
         self.size = size
         self.frame = Frame(0, 0, *size)
-
+        self.q1 = q1
+        self.q2 = q2
         self.player1 = Player(1)
         self.player2 = Player(2)
         self.paddle_reflect_ball = 1  # indikator koji paddle je odbio loptu i eventualno pogodio neki blok
@@ -45,7 +47,7 @@ class GameTwoPlayers:
         self.won = False
         self.reset()
         self.border_line = self.paddle1.bottom - self.paddle1.frame.height / 2  # granicka linija ispod koje loptica ne sme pasti
-
+        self.doAction()
         self.levels = LevelCreator.get_levels(size)
         self.level = self.levels[self.current_level]
 
@@ -195,7 +197,7 @@ class GameTwoPlayers:
 
     def get_deus(self, random_bonus, x):
         block = Brick(x, 0, 1)
-
+        
         if random_bonus == common.Bonuses.DecreaseBonus.value:
             bonus = ShrinkBonus(block.left, block.top)
         elif random_bonus == common.Bonuses.ExpandBonus.value:
@@ -233,10 +235,21 @@ class GameTwoPlayers:
 
             self.player1.bonuses.add(bonus)
             self.player2.bonuses.add(bonus)
+    #######################################
+    def listen(self):
+        while True:
+            block = self.q2.get()
+            #print(num)
+            self.get_bonus(block)
 
+    def doAction(self):
+        self.q1.put('go')
+        t = Thread(target=self.listen)
+        t.start()
+    ########################################
     def remove_blocks(self, blocks_to_remove):
         block = next(iter(blocks_to_remove))
-
+        self.q1.put(block)
         if self.ball.state != common.BallState.Powerful:
             ball = self.ball
             delta = ball.center - block.center
@@ -251,7 +264,7 @@ class GameTwoPlayers:
         self.level.blocks -= blocks_to_remove
 
         # dodela bonusa (moguca, zavisi od random vrednosti)
-        self.get_bonus(block)
+        #self.get_bonus(block)
 
         # dodela bodova odgovarajucem igracu
         if self.paddle_reflect_ball == 1:

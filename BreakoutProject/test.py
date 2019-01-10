@@ -25,11 +25,12 @@ from key_notifier import KeyNotifier
 
 
 class Window(QWidget):
-    def __init__(self, qu1: Queue):
+    def __init__(self, qu1: Queue, qu2: Queue, qu3: Queue):
         super().__init__()
 
         self.q = qu1
-        #self.q2 = q2
+        self.q2 = qu2
+        self.q3 = qu3
 
         self.init_ui()
         self.showFullScreen()
@@ -85,7 +86,7 @@ class Window(QWidget):
         self.timer.start(12)
 
     def start2(self):
-        self.game = GameTwoPlayers(Size(self.width(), self.height()))
+        self.game = GameTwoPlayers(Size(self.width(), self.height()), self.q2, self.q3)
         self.left1 = self.right1 = False
         self.left2 = self.right2 = False
         self.change_current_widget(self.game_widget)
@@ -304,14 +305,25 @@ def get_bonus_runner(queue):
         sleep(7)
 
 
+def get_bonus_runner1(queue1, queue2):
+    queue1.get()         # indikator go
+    while True:
+        block = queue1.get()
+        queue2.put(block)
+
+
 if __name__ == '__main__':
     APP = QApplication(sys.argv)
 
     q1 = Queue()
     q2 = Queue()
+    q3 = Queue()
 
-    WINDOW = Window(q1)
+    WINDOW = Window(q1, q2, q3)
     process = Process(target=get_bonus_runner, args=[q1])
+    process.start()
+
+    process = Process(target=get_bonus_runner1, args=[q2, q3])
     process.start()
 
     APP.setOverrideCursor(Qt.BlankCursor)

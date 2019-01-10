@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="06430f25-4385-499d-8232-ad7606821f9b" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -11,24 +10,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="abstract_objects.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BreakoutProject/abstract_objects.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="477">
-              <caret line="97" column="20" lean-forward="true" selection-start-line="96" selection-start-column="4" selection-end-line="97" selection-end-column="20" />
+            <state relative-caret-position="1479">
+              <caret line="97" column="20" selection-start-line="96" selection-start-column="4" selection-end-line="97" selection-end-column="20" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#1589#2015#0" expanded="false" />
+                <element signature="e#1589#2015#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="still_objects.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BreakoutProject/still_objects.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="221">
-              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -36,128 +35,92 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/BreakoutProject/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="836">
-              <caret line="297" column="0" lean-forward="true" selection-start-line="297" selection-start-column="0" selection-end-line="297" selection-end-column="0" />
+            <state relative-caret-position="-800">
+              <caret line="90" column="40" selection-start-line="90" selection-start-column="40" selection-end-line="90" selection-end-column="40" />
               <folding>
                 <element signature="e#0#10#0" expanded="true" />
-                <element signature="e#835#976#0" expanded="false" />
-                <element signature="e#1009#2364#0" expanded="false" />
-                <element signature="e#2396#2607#0" expanded="false" />
-                <element signature="e#2639#2954#0" expanded="false" />
-                <element signature="e#2987#3702#0" expanded="false" />
-                <element signature="e#3757#3816#0" expanded="false" />
-                <element signature="e#3848#4020#0" expanded="false" />
-                <element signature="e#4050#4606#0" expanded="false" />
-                <element signature="e#4642#5086#0" expanded="false" />
-                <element signature="e#5116#5126#0" expanded="false" />
-                <element signature="e#5165#5541#0" expanded="false" />
-                <element signature="e#5587#6673#0" expanded="false" />
-                <element signature="e#6721#7258#0" expanded="false" />
-                <element signature="e#7308#7344#0" expanded="false" />
-                <element signature="e#7387#7458#0" expanded="false" />
-                <element signature="e#7488#8964#0" expanded="false" />
-                <element signature="e#9007#9253#0" expanded="false" />
-                <element signature="e#9351#9888#0" expanded="false" />
-                <element signature="e#10021#10252#0" expanded="false" />
+                <element signature="e#1039#2446#0" />
+                <element signature="e#2478#2689#0" />
+                <element signature="e#3032#3747#0" />
+                <element signature="e#3802#3861#0" />
+                <element signature="e#4148#4686#0" />
+                <element signature="e#4722#5166#0" />
+                <element signature="e#5245#5547#0" />
+                <element signature="e#5667#6753#0" />
+                <element signature="e#6801#7338#0" />
+                <element signature="e#7467#7538#0" />
+                <element signature="e#7568#9044#0" />
+                <element signature="e#9087#9333#0" />
+                <element signature="e#9431#9968#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game.py" pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BreakoutProject/game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="242" column="31" lean-forward="true" selection-start-line="242" selection-start-column="31" selection-end-line="242" selection-end-column="31" />
+            <state relative-caret-position="-5900">
+              <caret line="36" column="6" lean-forward="true" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="6" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#442#799#0" expanded="false" />
-                <element signature="e#862#1406#0" expanded="false" />
-                <element signature="e#1455#1513#0" expanded="false" />
-                <element signature="e#1568#1602#0" expanded="false" />
-                <element signature="e#1652#1707#0" expanded="false" />
-                <element signature="e#1755#1775#0" expanded="false" />
-                <element signature="e#1812#2378#0" expanded="false" />
-                <element signature="e#2409#3019#0" expanded="false" />
-                <element signature="e#3057#3206#0" expanded="false" />
-                <element signature="e#3246#3488#0" expanded="false" />
-                <element signature="e#3540#4401#0" expanded="false" />
-                <element signature="e#4467#6266#0" expanded="false" />
-                <element signature="e#6317#6548#0" expanded="false" />
-                <element signature="e#6586#7007#0" expanded="false" />
-                <element signature="e#7063#8020#0" expanded="false" />
-                <element signature="e#9082#10021#0" expanded="false" />
-                <element signature="e#10058#10136#0" expanded="false" />
-                <element signature="e#10164#16653#0" expanded="false" />
-                <element signature="e#10198#10598#0" expanded="false" />
-                <element signature="e#10647#10676#0" expanded="false" />
-                <element signature="e#10731#10765#0" expanded="false" />
-                <element signature="e#10802#10974#0" expanded="false" />
-                <element signature="e#11005#11444#0" expanded="false" />
-                <element signature="e#11482#11631#0" expanded="false" />
-                <element signature="e#11671#11876#0" expanded="false" />
-                <element signature="e#11928#12568#0" expanded="false" />
-                <element signature="e#12611#13869#0" expanded="false" />
-                <element signature="e#13920#14027#0" expanded="false" />
-                <element signature="e#14065#14486#0" expanded="false" />
-                <element signature="e#15459#16180#0" expanded="false" />
-                <element signature="e#16220#16572#0" expanded="false" />
-                <element signature="e#16609#16653#0" expanded="false" />
+                <element signature="e#474#831#0" />
+                <element signature="e#3278#4139#0" />
+                <element signature="e#4197#5988#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="undesire_bonuses.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BreakoutProject/undesire_bonuses.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="153">
-              <caret line="24" column="30" lean-forward="false" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+              <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
               <folding>
-                <element signature="e#79#356#0" expanded="false" />
-                <element signature="e#397#530#0" expanded="false" />
-                <element signature="e#568#701#0" expanded="false" />
+                <element signature="e#79#356#0" />
+                <element signature="e#397#530#0" />
+                <element signature="e#568#701#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BreakoutProject/base.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
-              <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+              <caret line="100" selection-start-line="100" selection-end-line="100" />
               <folding>
-                <element signature="e#34#324#0" expanded="false" />
-                <element signature="e#344#1894#0" expanded="false" />
-                <element signature="e#1915#2437#0" expanded="false" />
+                <element signature="e#34#324#0" />
+                <element signature="e#344#1894#0" />
+                <element signature="e#1915#2437#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="common.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BreakoutProject/common.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="12" column="18" lean-forward="false" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+            <state>
+              <caret line="2" column="33" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
               <folding>
-                <element signature="e#0#11#0" expanded="true" />
-                <element signature="e#621#806#0" expanded="false" />
-                <element signature="e#831#951#0" expanded="false" />
+                <element signature="e#621#806#0" />
+                <element signature="e#831#951#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="desire_bonuses.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BreakoutProject/desire_bonuses.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="442">
-              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+              <caret line="26" selection-start-line="26" selection-end-line="26" />
               <folding>
                 <element signature="e#0#40#0" expanded="true" />
               </folding>
@@ -165,11 +128,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="levels.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BreakoutProject/levels.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="25" column="30" lean-forward="false" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+            <state relative-caret-position="408">
+              <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -177,11 +140,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="moving_objects.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/BreakoutProject/moving_objects.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="35" column="26" lean-forward="false" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+            <state relative-caret-position="238">
+              <caret line="14" column="56" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="56" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -209,46 +172,35 @@
         <option value="$PROJECT_DIR$/BreakoutProject/desire_bonuses.py" />
         <option value="$PROJECT_DIR$/BreakoutProject/still_objects.py" />
         <option value="$PROJECT_DIR$/BreakoutProject/undesire_bonuses.py" />
-        <option value="$PROJECT_DIR$/BreakoutProject/moving_objects.py" />
         <option value="$PROJECT_DIR$/BreakoutProject/levels.py" />
         <option value="$PROJECT_DIR$/BreakoutProject/common.py" />
         <option value="$PROJECT_DIR$/BreakoutProject/abstract_objects.py" />
-        <option value="$PROJECT_DIR$/BreakoutProject/game.py" />
         <option value="$PROJECT_DIR$/BreakoutProject/test.py" />
+        <option value="$PROJECT_DIR$/BreakoutProject/moving_objects.py" />
+        <option value="$PROJECT_DIR$/BreakoutProject/game.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="width" value="975" />
     <option name="height" value="1103" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="BreakoutGame-master_10.01_radeci" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BreakoutGame-master_10.01_radeci" type="462c0819:PsiDirectoryNode" />
+              <item name="BreakoutGame" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BreakoutGame" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="BreakoutGame-master_10.01_radeci" type="b2602c69:ProjectViewProjectNode" />
-              <item name="BreakoutGame-master_10.01_radeci" type="462c0819:PsiDirectoryNode" />
+              <item name="BreakoutGame" type="b2602c69:ProjectViewProjectNode" />
+              <item name="BreakoutGame" type="462c0819:PsiDirectoryNode" />
               <item name="BreakoutProject" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -274,8 +226,9 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.test">
+  <component name="RunManager" selected="Python.client">
     <configuration name="abstract_objects" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BreakoutGame" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -286,13 +239,38 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="BreakoutGame" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BreakoutProject/abstract_objects.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="client" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BreakoutGame" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ClientServerExample" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ClientServerExample/client.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="game" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BreakoutGame" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -303,30 +281,38 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="BreakoutGame" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BreakoutProject/game.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
-    <configuration name="level" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="server" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BreakoutGame" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/BreakoutProject" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ClientServerExample" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="BreakoutGame" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BreakoutProject/level.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ClientServerExample/server.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BreakoutGame" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -337,28 +323,31 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="BreakoutGame" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/BreakoutProject/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
     </configuration>
-    <list size="4">
-      <item index="0" class="java.lang.String" itemvalue="Python.level" />
-      <item index="1" class="java.lang.String" itemvalue="Python.test" />
-      <item index="2" class="java.lang.String" itemvalue="Python.abstract_objects" />
-      <item index="3" class="java.lang.String" itemvalue="Python.game" />
+    <list>
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.abstract_objects" />
+      <item itemvalue="Python.game" />
+      <item itemvalue="Python.server" />
+      <item itemvalue="Python.client" />
     </list>
     <recent_temporary>
-      <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Python.test" />
-        <item index="1" class="java.lang.String" itemvalue="Python.game" />
-        <item index="2" class="java.lang.String" itemvalue="Python.abstract_objects" />
+      <list>
+        <item itemvalue="Python.client" />
+        <item itemvalue="Python.server" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.game" />
+        <item itemvalue="Python.abstract_objects" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -374,110 +363,81 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1096" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1216" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32916668" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32916668" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32871652" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="right" id="R Packages" />
+      <window_info anchor="right" id="R Graphics" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Data View" order="3" />
     </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25266525" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32916668" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32871652" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Python Console" order="8" />
+      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="10" />
+      <window_info anchor="right" id="R Graphics" order="0" />
+      <window_info anchor="right" id="R Packages" order="1" />
+      <window_info anchor="right" id="Commander" order="2" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="3" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="4" weight="0.25" />
+      <window_info anchor="right" id="Data View" order="5" />
+    </layout-to-restore>
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="11" />
-    </breakpoint-manager>
-    <watches-manager />
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>self.frame.width</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>common.PADDLE_SIZE</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>common.PADDLE_SIZE*</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/BreakoutProject/level.py" />
     <entry file="file://$PROJECT_DIR$/BreakoutProject/abstract_objects.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1496">
-          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
+        <state relative-caret-position="1479">
+          <caret line="97" column="20" selection-start-line="96" selection-start-column="4" selection-end-line="97" selection-end-column="20" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#1589#2015#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/still_objects.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1173">
-          <caret line="224" column="43" lean-forward="true" selection-start-line="224" selection-start-column="43" selection-end-line="224" selection-end-column="43" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#442#799#0" expanded="false" />
-            <element signature="e#862#1406#0" expanded="false" />
-            <element signature="e#1455#1513#0" expanded="false" />
-            <element signature="e#1568#1602#0" expanded="false" />
-            <element signature="e#1652#1707#0" expanded="false" />
-            <element signature="e#1755#1775#0" expanded="false" />
-            <element signature="e#1812#2378#0" expanded="false" />
-            <element signature="e#2409#3019#0" expanded="false" />
-            <element signature="e#3057#3206#0" expanded="false" />
-            <element signature="e#3246#3488#0" expanded="false" />
-            <element signature="e#3540#4401#0" expanded="false" />
-            <element signature="e#4467#6266#0" expanded="false" />
-            <element signature="e#6317#6548#0" expanded="false" />
-            <element signature="e#6586#7007#0" expanded="false" />
-            <element signature="e#7063#8020#0" expanded="false" />
-            <element signature="e#9082#10021#0" expanded="false" />
-            <element signature="e#10058#10136#0" expanded="false" />
-            <element signature="e#10164#16653#0" expanded="false" />
-            <element signature="e#10198#10598#0" expanded="false" />
-            <element signature="e#10647#10676#0" expanded="false" />
-            <element signature="e#10731#10765#0" expanded="false" />
-            <element signature="e#10802#10974#0" expanded="false" />
-            <element signature="e#11005#11444#0" expanded="false" />
-            <element signature="e#11482#11631#0" expanded="false" />
-            <element signature="e#11671#11876#0" expanded="false" />
-            <element signature="e#11928#12568#0" expanded="false" />
-            <element signature="e#12611#13869#0" expanded="false" />
-            <element signature="e#13920#14027#0" expanded="false" />
-            <element signature="e#14065#14486#0" expanded="false" />
-            <element signature="e#15459#16180#0" expanded="false" />
-            <element signature="e#16220#16572#0" expanded="false" />
-            <element signature="e#16609#16653#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/undesire_bonuses.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="24" column="30" lean-forward="false" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
-          <folding>
-            <element signature="e#79#356#0" expanded="false" />
-            <element signature="e#397#530#0" expanded="false" />
-            <element signature="e#568#701#0" expanded="false" />
+            <element signature="e#1589#2015#0" />
           </folding>
         </state>
       </provider>
@@ -485,33 +445,11 @@
     <entry file="file://$PROJECT_DIR$/BreakoutProject/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
-          <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
+          <caret line="100" selection-start-line="100" selection-end-line="100" />
           <folding>
-            <element signature="e#34#324#0" expanded="false" />
-            <element signature="e#344#1894#0" expanded="false" />
-            <element signature="e#1915#2437#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/common.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="12" column="18" lean-forward="false" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#621#806#0" expanded="false" />
-            <element signature="e#831#951#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/desire_bonuses.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#34#324#0" />
+            <element signature="e#344#1894#0" />
+            <element signature="e#1915#2437#0" />
           </folding>
         </state>
       </provider>
@@ -519,231 +457,9 @@
     <entry file="file://$PROJECT_DIR$/BreakoutProject/levels.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
-          <caret line="25" column="30" lean-forward="true" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
+          <caret line="25" column="30" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/moving_objects.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="35" column="26" lean-forward="false" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1088">
-          <caret line="285" column="21" lean-forward="false" selection-start-line="285" selection-start-column="21" selection-end-line="285" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#835#976#0" expanded="false" />
-            <element signature="e#1009#2364#0" expanded="false" />
-            <element signature="e#2396#2607#0" expanded="false" />
-            <element signature="e#2639#2954#0" expanded="false" />
-            <element signature="e#2987#3702#0" expanded="false" />
-            <element signature="e#3757#3816#0" expanded="false" />
-            <element signature="e#3848#4020#0" expanded="false" />
-            <element signature="e#4050#4606#0" expanded="false" />
-            <element signature="e#4642#5086#0" expanded="false" />
-            <element signature="e#5116#5126#0" expanded="false" />
-            <element signature="e#5165#5541#0" expanded="false" />
-            <element signature="e#5587#6673#0" expanded="false" />
-            <element signature="e#6721#7258#0" expanded="false" />
-            <element signature="e#7308#7344#0" expanded="false" />
-            <element signature="e#7387#7458#0" expanded="false" />
-            <element signature="e#7488#8964#0" expanded="false" />
-            <element signature="e#9007#9253#0" expanded="false" />
-            <element signature="e#9351#9888#0" expanded="false" />
-            <element signature="e#10021#10252#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/abstract_objects.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1496">
-          <caret line="98" column="0" lean-forward="false" selection-start-line="98" selection-start-column="0" selection-end-line="98" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#1589#2015#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/still_objects.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/undesire_bonuses.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding>
-            <element signature="e#79#356#0" expanded="false" />
-            <element signature="e#397#530#0" expanded="false" />
-            <element signature="e#568#701#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
-          <folding>
-            <element signature="e#34#324#0" expanded="false" />
-            <element signature="e#344#1894#0" expanded="false" />
-            <element signature="e#1915#2437#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/common.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="833">
-          <caret line="51" column="0" lean-forward="false" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#621#806#0" expanded="false" />
-            <element signature="e#831#951#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/desire_bonuses.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="9" selection-end-column="64" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#442#799#0" expanded="false" />
-            <element signature="e#862#1406#0" expanded="false" />
-            <element signature="e#1455#1513#0" expanded="false" />
-            <element signature="e#1568#1602#0" expanded="false" />
-            <element signature="e#1652#1707#0" expanded="false" />
-            <element signature="e#1755#1775#0" expanded="false" />
-            <element signature="e#1812#2378#0" expanded="false" />
-            <element signature="e#2409#3019#0" expanded="false" />
-            <element signature="e#3057#3206#0" expanded="false" />
-            <element signature="e#3246#3488#0" expanded="false" />
-            <element signature="e#3540#4401#0" expanded="false" />
-            <element signature="e#4467#6266#0" expanded="false" />
-            <element signature="e#6317#6548#0" expanded="false" />
-            <element signature="e#6586#7007#0" expanded="false" />
-            <element signature="e#7063#8020#0" expanded="false" />
-            <element signature="e#9082#10021#0" expanded="false" />
-            <element signature="e#10058#10136#0" expanded="false" />
-            <element signature="e#10164#16653#0" expanded="false" />
-            <element signature="e#10198#10598#0" expanded="false" />
-            <element signature="e#10647#10676#0" expanded="false" />
-            <element signature="e#10731#10765#0" expanded="false" />
-            <element signature="e#10802#10974#0" expanded="false" />
-            <element signature="e#11005#11444#0" expanded="false" />
-            <element signature="e#11482#11631#0" expanded="false" />
-            <element signature="e#11671#11876#0" expanded="false" />
-            <element signature="e#11928#12568#0" expanded="false" />
-            <element signature="e#12611#13869#0" expanded="false" />
-            <element signature="e#13920#14027#0" expanded="false" />
-            <element signature="e#14065#14486#0" expanded="false" />
-            <element signature="e#15459#16180#0" expanded="false" />
-            <element signature="e#16220#16572#0" expanded="false" />
-            <element signature="e#16609#16653#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/levels.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="54" column="0" lean-forward="false" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/moving_objects.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="35" column="26" lean-forward="true" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3672">
-          <caret line="236" column="40" lean-forward="true" selection-start-line="236" selection-start-column="40" selection-end-line="236" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#835#976#0" expanded="false" />
-            <element signature="e#1009#2364#0" expanded="false" />
-            <element signature="e#2396#2607#0" expanded="false" />
-            <element signature="e#2639#2954#0" expanded="false" />
-            <element signature="e#2987#3702#0" expanded="false" />
-            <element signature="e#3757#3816#0" expanded="false" />
-            <element signature="e#3848#4020#0" expanded="false" />
-            <element signature="e#4050#4606#0" expanded="false" />
-            <element signature="e#4642#5086#0" expanded="false" />
-            <element signature="e#5116#5126#0" expanded="false" />
-            <element signature="e#5165#5541#0" expanded="false" />
-            <element signature="e#5587#6673#0" expanded="false" />
-            <element signature="e#6721#7258#0" expanded="false" />
-            <element signature="e#7308#7344#0" expanded="false" />
-            <element signature="e#7387#7458#0" expanded="false" />
-            <element signature="e#7488#8964#0" expanded="false" />
-            <element signature="e#9007#9253#0" expanded="false" />
-            <element signature="e#9351#9888#0" expanded="false" />
-            <element signature="e#10021#10252#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/level.py" />
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="100" column="0" lean-forward="false" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
-          <folding>
-            <element signature="e#34#324#0" expanded="false" />
-            <element signature="e#344#1894#0" expanded="false" />
-            <element signature="e#1915#2437#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/common.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="12" column="18" lean-forward="false" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#621#806#0" expanded="false" />
-            <element signature="e#831#951#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -751,40 +467,9 @@
     <entry file="file://$PROJECT_DIR$/BreakoutProject/desire_bonuses.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
-          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/moving_objects.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="35" column="26" lean-forward="false" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/levels.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="25" column="30" lean-forward="false" selection-start-line="25" selection-start-column="30" selection-end-line="25" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/abstract_objects.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="97" column="20" lean-forward="true" selection-start-line="96" selection-start-column="4" selection-end-line="97" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#1589#2015#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -792,9 +477,20 @@
     <entry file="file://$PROJECT_DIR$/BreakoutProject/still_objects.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BreakoutProject/common.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="2" column="33" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
+          <folding>
+            <element signature="e#621#806#0" />
+            <element signature="e#831#951#0" />
           </folding>
         </state>
       </provider>
@@ -802,82 +498,57 @@
     <entry file="file://$PROJECT_DIR$/BreakoutProject/undesire_bonuses.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="24" column="30" lean-forward="false" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
+          <caret line="24" column="30" selection-start-line="24" selection-start-column="30" selection-end-line="24" selection-end-column="30" />
           <folding>
-            <element signature="e#79#356#0" expanded="false" />
-            <element signature="e#397#530#0" expanded="false" />
-            <element signature="e#568#701#0" expanded="false" />
+            <element signature="e#79#356#0" />
+            <element signature="e#397#530#0" />
+            <element signature="e#568#701#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/BreakoutProject/test.py">
+    <entry file="file://$PROJECT_DIR$/BreakoutProject/moving_objects.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="297" column="0" lean-forward="true" selection-start-line="297" selection-start-column="0" selection-end-line="297" selection-end-column="0" />
+        <state relative-caret-position="238">
+          <caret line="14" column="56" selection-start-line="14" selection-start-column="56" selection-end-line="14" selection-end-column="56" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
-            <element signature="e#835#976#0" expanded="false" />
-            <element signature="e#1009#2364#0" expanded="false" />
-            <element signature="e#2396#2607#0" expanded="false" />
-            <element signature="e#2639#2954#0" expanded="false" />
-            <element signature="e#2987#3702#0" expanded="false" />
-            <element signature="e#3757#3816#0" expanded="false" />
-            <element signature="e#3848#4020#0" expanded="false" />
-            <element signature="e#4050#4606#0" expanded="false" />
-            <element signature="e#4642#5086#0" expanded="false" />
-            <element signature="e#5116#5126#0" expanded="false" />
-            <element signature="e#5165#5541#0" expanded="false" />
-            <element signature="e#5587#6673#0" expanded="false" />
-            <element signature="e#6721#7258#0" expanded="false" />
-            <element signature="e#7308#7344#0" expanded="false" />
-            <element signature="e#7387#7458#0" expanded="false" />
-            <element signature="e#7488#8964#0" expanded="false" />
-            <element signature="e#9007#9253#0" expanded="false" />
-            <element signature="e#9351#9888#0" expanded="false" />
-            <element signature="e#10021#10252#0" expanded="false" />
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/BreakoutProject/game.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="242" column="31" lean-forward="true" selection-start-line="242" selection-start-column="31" selection-end-line="242" selection-end-column="31" />
+        <state relative-caret-position="-5900">
+          <caret line="36" column="6" lean-forward="true" selection-start-line="36" selection-start-column="6" selection-end-line="36" selection-end-column="6" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#442#799#0" expanded="false" />
-            <element signature="e#862#1406#0" expanded="false" />
-            <element signature="e#1455#1513#0" expanded="false" />
-            <element signature="e#1568#1602#0" expanded="false" />
-            <element signature="e#1652#1707#0" expanded="false" />
-            <element signature="e#1755#1775#0" expanded="false" />
-            <element signature="e#1812#2378#0" expanded="false" />
-            <element signature="e#2409#3019#0" expanded="false" />
-            <element signature="e#3057#3206#0" expanded="false" />
-            <element signature="e#3246#3488#0" expanded="false" />
-            <element signature="e#3540#4401#0" expanded="false" />
-            <element signature="e#4467#6266#0" expanded="false" />
-            <element signature="e#6317#6548#0" expanded="false" />
-            <element signature="e#6586#7007#0" expanded="false" />
-            <element signature="e#7063#8020#0" expanded="false" />
-            <element signature="e#9082#10021#0" expanded="false" />
-            <element signature="e#10058#10136#0" expanded="false" />
-            <element signature="e#10164#16653#0" expanded="false" />
-            <element signature="e#10198#10598#0" expanded="false" />
-            <element signature="e#10647#10676#0" expanded="false" />
-            <element signature="e#10731#10765#0" expanded="false" />
-            <element signature="e#10802#10974#0" expanded="false" />
-            <element signature="e#11005#11444#0" expanded="false" />
-            <element signature="e#11482#11631#0" expanded="false" />
-            <element signature="e#11671#11876#0" expanded="false" />
-            <element signature="e#11928#12568#0" expanded="false" />
-            <element signature="e#12611#13869#0" expanded="false" />
-            <element signature="e#13920#14027#0" expanded="false" />
-            <element signature="e#14065#14486#0" expanded="false" />
-            <element signature="e#15459#16180#0" expanded="false" />
-            <element signature="e#16220#16572#0" expanded="false" />
-            <element signature="e#16609#16653#0" expanded="false" />
+            <element signature="e#474#831#0" />
+            <element signature="e#3278#4139#0" />
+            <element signature="e#4197#5988#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/BreakoutProject/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-800">
+          <caret line="90" column="40" selection-start-line="90" selection-start-column="40" selection-end-line="90" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#1039#2446#0" />
+            <element signature="e#2478#2689#0" />
+            <element signature="e#3032#3747#0" />
+            <element signature="e#3802#3861#0" />
+            <element signature="e#4148#4686#0" />
+            <element signature="e#4722#5166#0" />
+            <element signature="e#5245#5547#0" />
+            <element signature="e#5667#6753#0" />
+            <element signature="e#6801#7338#0" />
+            <element signature="e#7467#7538#0" />
+            <element signature="e#7568#9044#0" />
+            <element signature="e#9087#9333#0" />
+            <element signature="e#9431#9968#0" />
           </folding>
         </state>
       </provider>
