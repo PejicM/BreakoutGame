@@ -14,7 +14,9 @@ from PyQt5.QtGui import QPainter, QImage, QBrush, QPalette, QFont, QColor
 from PyQt5.QtCore import Qt, QRectF, QTimer
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaPlaylist
 from multiprocessing import Process, Queue
-from random import  randint
+from random import randint
+from threading import Thread
+from time import sleep
 
 from common import BallState, Size
 from game import GameOnePlayer, GameTwoPlayers
@@ -23,16 +25,18 @@ from key_notifier import KeyNotifier
 
 
 class Window(QWidget):
-    def __init__(self, q1, q2):
+    def __init__(self, qu1: Queue):
         super().__init__()
-        self.q1 = q1
-        self.q2 = q2
-        #self.queue = queue
+
+        self.q = qu1
+        #self.q2 = q2
+
         self.init_ui()
         self.showFullScreen()
 
     def init_ui(self):
         self.screen = QDesktopWidget().screenGeometry()
+        self.half_width = (self.screen.width()) / 2
         self.setFixedSize(self.screen.width(), self.screen.height() - 70)
         self.move(0, 0)
 
@@ -86,8 +90,8 @@ class Window(QWidget):
         self.left2 = self.right2 = False
         self.change_current_widget(self.game_widget)
         self.started = True
-        self.game.q1 = self.q1
-        self.game.q2 = self.q2
+
+        self.doAction()
         self.timer.start(12)
 
     def restart(self):
@@ -111,11 +115,14 @@ class Window(QWidget):
 
     def listen(self):
         while True:
-            num = self.queue.get()
-            print("got {0}".format(num))
-            self.pbar.setValue(num)
-            if num == 100:
-                break
+            num = self.q.get()
+            print(num)
+            self.game.get_deus(num, self.half_width)
+
+    def doAction(self):
+        self.q.put('go')
+        t = Thread(target=self.listen)
+        t.start()
 
     def tick(self):
         if self.game.game_over:
@@ -131,7 +138,7 @@ class Window(QWidget):
         else:
             turn_rate1 = 1 if self.right1 else -1 if self.left1 else 0
             turn_rate2 = 1 if self.right2 else -1 if self.left2 else 0
-            self.game.tick(self.q1, self.q2, turn_rate1, turn_rate2)
+            self.game.tick(turn_rate1, turn_rate2)
 
         self.repaint()
 
@@ -290,10 +297,11 @@ class Window(QWidget):
         return button
 
 
-def get_bonus_runner(qu1, qu2):
+def get_bonus_runner(queue):
+    queue.get()         # indikator go
     while True:
-        qu1.get()
-        qu2.put(randint(0, 5))
+        queue.put(randint(0, 5))
+        sleep(7)
 
 
 if __name__ == '__main__':
@@ -301,8 +309,10 @@ if __name__ == '__main__':
 
     q1 = Queue()
     q2 = Queue()
-    WINDOW = Window(q1, q2)
-    process = Process(target=get_bonus_runner, args=[q1, q2])
+
+    WINDOW = Window(q1)
+    process = Process(target=get_bonus_runner, args=[q1])
     process.start()
+
     APP.setOverrideCursor(Qt.BlankCursor)
     APP.exec_()

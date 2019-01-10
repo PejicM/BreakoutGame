@@ -7,6 +7,7 @@ from PyQt5.QtCore import Qt
 from common import BallState
 from abstract_objects import BonusObject
 from moving_objects import Ball, Paddle
+from still_objects import Brick
 from base import Frame, Vector
 from levels import LevelCreator
 from desire_bonuses import ExpandBonus, FireballBonus, LifeBonus
@@ -75,17 +76,6 @@ class GameTwoPlayers:
         for bonus2 in self.player2.bonuses:
             yield bonus2
 
-        """q.put(self.paddle1)
-        q.put(self.paddle2)
-        q.put(self.ball)
-
-        for block in self.level.blocks:
-            q.put(block)
-        for bonus1 in self.player1.bonuses:
-            q.put(bonus1)
-        for bonus2 in self.player2.bonuses:
-            q.put(bonus2)"""
-
     def reset(self):
         self.player1.bonuses = set()
         self.player2.bonuses = set()
@@ -138,7 +128,7 @@ class GameTwoPlayers:
                 self.ball.move(self.paddle1.left - old_x1)
                 self.reflect_ball()
 
-    def tick(self, q1, q2, turn_rate1=0, turn_rate2=0):
+    def tick(self, turn_rate1=0, turn_rate2=0):
         """ Promene polozaja objekata na svaki otkucaj tajmera"""
         if self.game_over or self.won:
             return
@@ -171,7 +161,7 @@ class GameTwoPlayers:
                 blocks_to_remove.add(block)
 
         if len(blocks_to_remove) != 0:
-            self.remove_blocks(blocks_to_remove, q1, q2)
+            self.remove_blocks(blocks_to_remove)
 
         self.remove_bonuses()
 
@@ -203,28 +193,48 @@ class GameTwoPlayers:
         if ball.direction.y < 0 and ball.y < self.frame.top + 0.1:
             ball.direction.y = -ball.direction.y
 
-    def get_bonus(self, block, random_bonus):
+    def get_deus(self, random_bonus, x):
+        block = Brick(x, 0, 1)
+
+        if random_bonus == common.Bonuses.DecreaseBonus.value:
+            bonus = ShrinkBonus(block.left, block.top)
+        elif random_bonus == common.Bonuses.ExpandBonus.value:
+            bonus = ExpandBonus(block.left, block.top)
+        elif random_bonus == common.Bonuses.FireBallBonus.value:
+            bonus = FireballBonus(block.left, block.top)
+        elif random_bonus == common.Bonuses.FastBallBonus.value:
+            bonus = FastBallBonus(block.left, block.top)
+        elif random_bonus == common.Bonuses.LifeBonus.value:
+            bonus = LifeBonus(block.left, block.top)
+        else:
+            bonus = DeathBonus(block.left, block.top)
+
+        if random_bonus != -1:
+            self.player1.bonuses.add(bonus)
+            self.player2.bonuses.add(bonus)
+
+    def get_bonus(self, block):
         chance = random.random()
         if chance > 0.7:
-            #random_bonus = BonusObject.get_random_bonus(1)
+            random_bonus = BonusObject.get_random_bonus()
 
-            if random_bonus == common.Bonuses.DecreaseBonus.value:
+            if random_bonus == common.Bonuses.DecreaseBonus:
                 bonus = ShrinkBonus(block.left, block.top)
-            elif random_bonus == common.Bonuses.ExpandBonus.value:
+            elif random_bonus == common.Bonuses.ExpandBonus:
                 bonus = ExpandBonus(block.left, block.top)
-            elif random_bonus == common.Bonuses.FireBallBonus.value:
+            elif random_bonus == common.Bonuses.FireBallBonus:
                 bonus = FireballBonus(block.left, block.top)
-            elif random_bonus == common.Bonuses.FastBallBonus.value:
+            elif random_bonus == common.Bonuses.FastBallBonus:
                 bonus = FastBallBonus(block.left, block.top)
-            elif random_bonus == common.Bonuses.LifeBonus.value:
+            elif random_bonus == common.Bonuses.LifeBonus:
                 bonus = LifeBonus(block.left, block.top)
-            elif random_bonus == common.Bonuses.DeathBonus.value:
+            elif random_bonus == common.Bonuses.DeathBonus:
                 bonus = DeathBonus(block.left, block.top)
 
             self.player1.bonuses.add(bonus)
             self.player2.bonuses.add(bonus)
 
-    def remove_blocks(self, blocks_to_remove, q1, q2):
+    def remove_blocks(self, blocks_to_remove):
         block = next(iter(blocks_to_remove))
 
         if self.ball.state != common.BallState.Powerful:
@@ -239,10 +249,9 @@ class GameTwoPlayers:
                 ball.direction.x = -ball.direction.x
 
         self.level.blocks -= blocks_to_remove
-        q1.put('go')
-        random_bonus = q2.get()
+
         # dodela bonusa (moguca, zavisi od random vrednosti)
-        self.get_bonus(block, random_bonus)
+        self.get_bonus(block)
 
         # dodela bodova odgovarajucem igracu
         if self.paddle_reflect_ball == 1:
