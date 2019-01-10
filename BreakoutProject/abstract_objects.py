@@ -94,5 +94,5 @@ class BonusObject(MovingObject):
         pass
 
     @staticmethod
-    def get_random_bonus():
-        return random.choice(list(common.Bonuses))
+    def get_random_bonus(index: int):
+        return index

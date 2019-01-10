@@ -2,7 +2,9 @@ import random
 import common
 from math import pi, cos
 from multiprocessing import Queue
+from PyQt5.QtCore import Qt
 
+from common import BallState
 from abstract_objects import BonusObject
 from moving_objects import Ball, Paddle
 from base import Frame, Vector
@@ -105,12 +107,38 @@ class GameTwoPlayers:
     def get_next_level(self):
         self.current_level += 1
         if self.current_level < len(self.levels) + 1:
+            self.ball.velocity *= 1.2
             self.level = self.levels[self.current_level]
             self.reset()
             return True
         return False
 
-    def tick(self, turn_rate1=0, turn_rate2=0):
+    def update_moving_objects(self, key):
+        if key == Qt.Key_Right:
+            self.paddle2.move(1)
+            self.normalize_paddle_location()
+        elif key == Qt.Key_Left:
+            self.paddle2.move(-1)
+            self.normalize_paddle_location()
+
+        if key == Qt.Key_D:
+            old_x1 = self.paddle1.left
+            self.paddle1.move(1)
+            self.normalize_paddle_location()
+            # pomeranje lopte
+            if self.ball.state == BallState.Caught:
+                self.ball.move(self.paddle1.left - old_x1)
+                self.reflect_ball()
+        elif key == Qt.Key_A:
+            old_x1 = self.paddle1.left
+            self.paddle1.move(-1)
+            self.normalize_paddle_location()
+            # pomeranje lopte
+            if self.ball.state == BallState.Caught:
+                self.ball.move(self.paddle1.left - old_x1)
+                self.reflect_ball()
+
+    def tick(self, q1, q2, turn_rate1=0, turn_rate2=0):
         """ Promene polozaja objekata na svaki otkucaj tajmera"""
         if self.game_over or self.won:
             return
@@ -143,7 +171,7 @@ class GameTwoPlayers:
                 blocks_to_remove.add(block)
 
         if len(blocks_to_remove) != 0:
-            self.remove_blocks(blocks_to_remove)
+            self.remove_blocks(blocks_to_remove, q1, q2)
 
         self.remove_bonuses()
 
@@ -175,28 +203,28 @@ class GameTwoPlayers:
         if ball.direction.y < 0 and ball.y < self.frame.top + 0.1:
             ball.direction.y = -ball.direction.y
 
-    def get_bonus(self, block):
+    def get_bonus(self, block, random_bonus):
         chance = random.random()
         if chance > 0.7:
-            random_bonus = BonusObject.get_random_bonus()
+            #random_bonus = BonusObject.get_random_bonus(1)
 
-            if random_bonus == common.Bonuses.DecreaseBonus:
+            if random_bonus == common.Bonuses.DecreaseBonus.value:
                 bonus = ShrinkBonus(block.left, block.top)
-            elif random_bonus == common.Bonuses.ExpandBonus:
+            elif random_bonus == common.Bonuses.ExpandBonus.value:
                 bonus = ExpandBonus(block.left, block.top)
-            elif random_bonus == common.Bonuses.FireBallBonus:
+            elif random_bonus == common.Bonuses.FireBallBonus.value:
                 bonus = FireballBonus(block.left, block.top)
-            elif random_bonus == common.Bonuses.FastBallBonus:
+            elif random_bonus == common.Bonuses.FastBallBonus.value:
                 bonus = FastBallBonus(block.left, block.top)
-            elif random_bonus == common.Bonuses.LifeBonus:
+            elif random_bonus == common.Bonuses.LifeBonus.value:
                 bonus = LifeBonus(block.left, block.top)
-            elif random_bonus == common.Bonuses.DeathBonus:
+            elif random_bonus == common.Bonuses.DeathBonus.value:
                 bonus = DeathBonus(block.left, block.top)
 
             self.player1.bonuses.add(bonus)
             self.player2.bonuses.add(bonus)
 
-    def remove_blocks(self, blocks_to_remove):
+    def remove_blocks(self, blocks_to_remove, q1, q2):
         block = next(iter(blocks_to_remove))
 
         if self.ball.state != common.BallState.Powerful:
@@ -211,9 +239,10 @@ class GameTwoPlayers:
                 ball.direction.x = -ball.direction.x
 
         self.level.blocks -= blocks_to_remove
-
+        q1.put('go')
+        random_bonus = q2.get()
         # dodela bonusa (moguca, zavisi od random vrednosti)
-        self.get_bonus(block)
+        self.get_bonus(block, random_bonus)
 
         # dodela bodova odgovarajucem igracu
         if self.paddle_reflect_ball == 1:
@@ -308,6 +337,25 @@ class GameOnePlayer:
 
             return True
         return False
+
+    def update_moving_objects(self, key):
+        if key == Qt.Key_Right:
+            old_x1 = self.paddle.left
+            self.paddle.move(1)
+            self.normalize_paddle_location()
+            # pomeranje lopte
+            if self.ball.state == BallState.Caught:
+                self.ball.move(self.paddle.left - old_x1)
+                self.reflect_ball()
+
+        elif key == Qt.Key_Left:
+            old_x1 = self.paddle.left
+            self.paddle.move(-1)
+            self.normalize_paddle_location()
+            # pomeranje lopte
+            if self.ball.state == BallState.Caught:
+                self.ball.move(self.paddle.left - old_x1)
+                self.reflect_ball()
 
     def tick(self, turn_rate=0):
         """ Promene polozaja objekata na svaki otkucaj tajmera"""

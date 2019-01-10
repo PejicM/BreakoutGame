@@ -14,6 +14,7 @@ from PyQt5.QtGui import QPainter, QImage, QBrush, QPalette, QFont, QColor
 from PyQt5.QtCore import Qt, QRectF, QTimer
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaPlaylist
 from multiprocessing import Process, Queue
+from random import  randint
 
 from common import BallState, Size
 from game import GameOnePlayer, GameTwoPlayers
@@ -22,9 +23,10 @@ from key_notifier import KeyNotifier
 
 
 class Window(QWidget):
-    def __init__(self):
+    def __init__(self, q1, q2):
         super().__init__()
-
+        self.q1 = q1
+        self.q2 = q2
         #self.queue = queue
         self.init_ui()
         self.showFullScreen()
@@ -84,22 +86,24 @@ class Window(QWidget):
         self.left2 = self.right2 = False
         self.change_current_widget(self.game_widget)
         self.started = True
+        self.game.q1 = self.q1
+        self.game.q2 = self.q2
         self.timer.start(12)
 
     def restart(self):
         if self.game_mode == 1:
-            reply = QMessageBox.question(self, 'Restart', 'Your score: %s. Do you want to restart?' % self.game.player.score,
+            reply = QMessageBox.question(self, 'Play again', 'Your score: %s.\nDo you want to play again?' % self.game.player.score,
                                      QMessageBox.Yes | QMessageBox.No)
         else:
-            reply = QMessageBox.question(self, 'Restart',
-                                         'Player 1 score: %s.\nPlayer 2 score: %s.'
+            reply = QMessageBox.question(self, 'Play again',
+                                         'Player 1 score: %s.\nPlayer 2 score: %s.\nDo you want to play again?'
                                          % (self.game.player1.score, self.game.player2.score),
                                          QMessageBox.Yes | QMessageBox.No)
 
         if reply == QMessageBox.Yes:
-            self.start1()
-        else:
             self.change_current_widget(self.main_menu)
+        else:
+            self.quit()
 
     def change_current_widget(self, widget):
         self.stacked.setCurrentWidget(widget)
@@ -127,7 +131,7 @@ class Window(QWidget):
         else:
             turn_rate1 = 1 if self.right1 else -1 if self.left1 else 0
             turn_rate2 = 1 if self.right2 else -1 if self.left2 else 0
-            self.game.tick(turn_rate1, turn_rate2)
+            self.game.tick(self.q1, self.q2, turn_rate1, turn_rate2)
 
         self.repaint()
 
@@ -213,49 +217,7 @@ class Window(QWidget):
                 self.right2 = False
 
     def __update_position__(self, key):
-        if self.game_mode == 1:
-            if key == Qt.Key_Right:
-                old_x1 = self.game.paddle.left
-                self.game.paddle.move(1)
-                self.game.normalize_paddle_location()
-                # pomeranje lopte
-                if self.game.ball.state == BallState.Caught:
-                    self.game.ball.move(self.game.paddle1.left - old_x1)
-                    self.game.reflect_ball()
-
-            elif key == Qt.Key_Left:
-                old_x1 = self.game.paddle.left
-                self.game.paddle.move(-1)
-                self.game.normalize_paddle_location()
-                # pomeranje lopte
-                if self.game.ball.state == BallState.Caught:
-                    self.game.ball.move(self.game.paddle1.left - old_x1)
-                    self.game.reflect_ball()
-
-        if self.game_mode == 2:
-            if key == Qt.Key_Right:
-                self.game.paddle2.move(1)
-                self.game.normalize_paddle_location()
-            elif key == Qt.Key_Left:
-                self.game.paddle2.move(-1)
-                self.game.normalize_paddle_location()
-
-            if key == Qt.Key_D:
-                old_x1 = self.game.paddle1.left
-                self.game.paddle1.move(1)
-                self.game.normalize_paddle_location()
-                # pomeranje lopte
-                if self.game.ball.state == BallState.Caught:
-                    self.game.ball.move(self.game.paddle1.left - old_x1)
-                    self.game.reflect_ball()
-            elif key == Qt.Key_A:
-                old_x1 = self.game.paddle1.left
-                self.game.paddle1.move(-1)
-                self.game.normalize_paddle_location()
-                # pomeranje lopte
-                if self.game.ball.state == BallState.Caught:
-                    self.game.ball.move(self.game.paddle1.left - old_x1)
-                    self.game.reflect_ball()
+        self.game.update_moving_objects(key)
 
     def paintEvent(self, event):
         self.painter.begin(self)
@@ -289,12 +251,9 @@ class Window(QWidget):
             self.painter.drawText(0, 20, 'Player 1 score: %s' % str(self.game.player1.score))
             self.painter.drawText(self.screen.width() - 220, 20, 'Player 2 score: %s' % str(self.game.player2.score))
 
+            draw_x = (self.screen.width()) / 2 + 20
+            draw_y = 0
             for _ in range(self.game.player1.lives):
-                self.painter.drawImage(draw_x, draw_y, life_img)
-                draw_x -= life_img.width()
-
-            draw_x = self.screen.width() - 220 + 57
-            for _ in range(self.game.player2.lives):
                 self.painter.drawImage(draw_x, draw_y, life_img)
                 draw_x -= life_img.width()
 
@@ -303,28 +262,10 @@ class Window(QWidget):
         if self.game.game_over:
             return
 
-        """
-        JAKO SPORO I GLUPO, MORAS VRATITI GET_OBJECTS NA STARO I OBRISATI OVO
-        
-        queue = Queue()
-        proc_ball = Process(target=self.game.get_ball, args=[queue])
-        proc_paddle = Process(target=self.game.get_paddle, args=[queue])
-
-        proc_ball.start()
-        proc_paddle.start()
-        
-        proc_ball.join()
-        proc_paddle.join()
-
-        for _ in range(queue.qsize()):
-            obj = queue.get()
-            self.painter.drawImage(QRectF(*obj.location, obj.frame.width, obj.frame.height),
-                                   QImage(obj.get_image()))"""
-
         self.draw_game_objects()
 
     def draw_game_objects(self):
-        """Function draw all the objects in the game"""
+        """ Function draw all the objects in the game """
         for obj in self.game.get_objects():
             self.painter.drawImage(QRectF(*obj.location, obj.frame.width, obj.frame.height),
                                    QImage(obj.get_image()))
@@ -349,8 +290,19 @@ class Window(QWidget):
         return button
 
 
+def get_bonus_runner(qu1, qu2):
+    while True:
+        qu1.get()
+        qu2.put(randint(0, 5))
+
+
 if __name__ == '__main__':
     APP = QApplication(sys.argv)
-    WINDOW = Window()
+
+    q1 = Queue()
+    q2 = Queue()
+    WINDOW = Window(q1, q2)
+    process = Process(target=get_bonus_runner, args=[q1, q2])
+    process.start()
     APP.setOverrideCursor(Qt.BlankCursor)
     APP.exec_()

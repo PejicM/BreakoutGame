@@ -23,7 +23,8 @@ class LevelCreator:
         blocks = set()
         for i in range(rows):
             for j in range(colons):
-                blocks.add(LevelCreator._create_block(width, height, i, j, 2))
+                if i % 2 == 1:
+                    blocks.add(LevelCreator._create_block(width, height, i, j, 2))
 
         levels[level] = Level(level, blocks)
 
