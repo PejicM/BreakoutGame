@@ -79,10 +79,12 @@ class Window(QWidget):
         self.stacked.setCurrentWidget(self.main_menu)
 
     def start1(self):
-        self.game = GameOnePlayer(Size(self.width(), self.height()))
+        self.game = GameOnePlayer(Size(self.width(), self.height()), self.q2, self.q3)
         self.left1 = self.right1 = False
         self.change_current_widget(self.game_widget)
         self.started = True
+
+        #self.doAction()
         self.timer.start(12)
 
     def start2(self):
@@ -92,7 +94,7 @@ class Window(QWidget):
         self.change_current_widget(self.game_widget)
         self.started = True
 
-        self.doAction()
+        #self.doAction()
         self.timer.start(12)
 
     def restart(self):
@@ -148,8 +150,16 @@ class Window(QWidget):
             QMessageBox.information(self, 'Win', 'You win. Your score: %s'
                                     % self.game.player.score)
         else:
-            QMessageBox.information(self, 'Win', 'You win. Player 1 score: %s' % self.game.player1.score,
-                                    'Player 2 score: %s' % self.game.player2.score)
+            if self.game.player1.score > self.game.player2.score:
+                QMessageBox.information(self, 'Win', 'Player 1 score: %s' % self.game.player1.score,
+                                        'Player 2 score: %s\nCongratulations to player 1!' % self.game.player2.score)
+            elif self.game.player2.score < self.game.player1.score:
+                QMessageBox.information(self, 'Win', 'Player 1 score: %s' % self.game.player1.score,
+                                        'Player 2 score: %s\nCongratulations to player 2!' % self.game.player2.score)
+            else:
+                QMessageBox.information(self, 'Win', 'Player 1 score: %s' % self.game.player1.score,
+                                        'Player 2 score: %s\nCongratulations to both players!' % self.game.player2.score)
+
         self.started = False
         self.change_current_widget(self.main_menu)
 
@@ -257,7 +267,7 @@ class Window(QWidget):
         else:
             self.game_mode = 2
             self.painter.drawText(0, 20, 'Player 1 score: %s' % str(self.game.player1.score))
-            self.painter.drawText(self.screen.width() - 220, 20, 'Player 2 score: %s' % str(self.game.player2.score))
+            self.painter.drawText(self.screen.width() - 250, 20, 'Player 2 score: %s' % str(self.game.player2.score))
 
             draw_x = (self.screen.width()) / 2 + 20
             draw_y = 0
@@ -298,14 +308,14 @@ class Window(QWidget):
         return button
 
 
-def get_bonus_runner(queue):
+def get_deus_runner(queue):
     queue.get()         # indikator go
     while True:
         queue.put(randint(0, 5))
         sleep(7)
 
 
-def get_bonus_runner1(queue1, queue2):
+def get_bonus_runner(queue1, queue2):
     queue1.get()         # indikator go
     while True:
         block = queue1.get()
@@ -320,10 +330,11 @@ if __name__ == '__main__':
     q3 = Queue()
 
     WINDOW = Window(q1, q2, q3)
-    process = Process(target=get_bonus_runner, args=[q1])
+
+    process = Process(target=get_deus_runner, args=[q1])
     process.start()
 
-    process = Process(target=get_bonus_runner1, args=[q2, q3])
+    process = Process(target=get_bonus_runner, args=[q2, q3])
     process.start()
 
     APP.setOverrideCursor(Qt.BlankCursor)
