@@ -151,14 +151,17 @@ class Window(QWidget):
                                     % self.game.player.score)
         else:
             if self.game.player1.score > self.game.player2.score:
-                QMessageBox.information(self, 'Win', 'Player 1 score: %s' % self.game.player1.score,
-                                        'Player 2 score: %s\nCongratulations to player 1!' % self.game.player2.score)
-            elif self.game.player2.score < self.game.player1.score:
-                QMessageBox.information(self, 'Win', 'Player 1 score: %s' % self.game.player1.score,
-                                        'Player 2 score: %s\nCongratulations to player 2!' % self.game.player2.score)
+                QMessageBox.information(self, 'Win',
+                                        'Player 1 score: %s\nPlayer 2 score: %s\nCongratulations to player 1!'
+                                        % (self.game.player1.score, self.game.player2.score))
+            elif self.game.player1.score < self.game.player2.score:
+                QMessageBox.information(self, 'Win',
+                                        'Player 1 score: %s\nPlayer 2 score: %s\nCongratulations to player 2!'
+                                        % (self.game.player1.score, self.game.player2.score))
             else:
-                QMessageBox.information(self, 'Win', 'Player 1 score: %s' % self.game.player1.score,
-                                        'Player 2 score: %s\nCongratulations to both players!' % self.game.player2.score)
+                QMessageBox.information(self, 'Win',
+                                        'Player 1 score: %s\nPlayer 2 score: %s\nCongratulations to both players!'
+                                        % (self.game.player1.score, self.game.player2.score))
 
         self.started = False
         self.change_current_widget(self.main_menu)
