@@ -99,7 +99,7 @@ class GameTwoPlayers:
     def get_next_level(self):
         self.current_level += 1
         if self.current_level < len(self.levels) + 1:
-            self.ball.velocity *= 1.2
+            self.ball.velocity = self.current_level + common.BALL_VELOCITY
             self.level = self.levels[self.current_level]
             self.reset()
             return True
@@ -153,6 +153,7 @@ class GameTwoPlayers:
 
         if self.level_completed:
             self.player1.score += 100 * self.current_level
+            self.player2.score += 100 * self.current_level
             if not self.get_next_level():
                 self.won = True
 
@@ -235,6 +236,7 @@ class GameTwoPlayers:
 
             self.player1.bonuses.add(bonus)
             self.player2.bonuses.add(bonus)
+
     #######################################
     def listen(self):
         while True:
@@ -247,6 +249,7 @@ class GameTwoPlayers:
         t = Thread(target=self.listen)
         t.start()
     ########################################
+
     def remove_blocks(self, blocks_to_remove):
         block = next(iter(blocks_to_remove))
         self.q1.put(block)
@@ -305,16 +308,19 @@ class GameTwoPlayers:
 
 
 class GameOnePlayer:
-    def __init__(self, size):
+    def __init__(self, size, q1: Queue, q2: Queue):
         self.size = size
         self.frame = Frame(0, 0, *size)
 
+        self.q1 = q1
+        self.q2 = q2
         self.player = Player(1)
         self.current_level = 1
         self.won = False
         self.reset()
         self.border_line = self.paddle.bottom - self.paddle.frame.height / 2  # granicka linija ispod koje loptica ne sme pasti
 
+        self.doAction()
         self.levels = LevelCreator.get_levels(size)
         self.level = self.levels[self.current_level]
 
@@ -430,6 +436,25 @@ class GameOnePlayer:
         if ball.direction.y < 0 and ball.y < self.frame.top + 0.1:
             ball.direction.y = -ball.direction.y
 
+    def get_deus(self, random_bonus, x):
+        block = Brick(x, 0, 1)
+
+        if random_bonus == common.Bonuses.DecreaseBonus.value:
+            bonus = ShrinkBonus(block.left, block.top)
+        elif random_bonus == common.Bonuses.ExpandBonus.value:
+            bonus = ExpandBonus(block.left, block.top)
+        elif random_bonus == common.Bonuses.FireBallBonus.value:
+            bonus = FireballBonus(block.left, block.top)
+        elif random_bonus == common.Bonuses.FastBallBonus.value:
+            bonus = FastBallBonus(block.left, block.top)
+        elif random_bonus == common.Bonuses.LifeBonus.value:
+            bonus = LifeBonus(block.left, block.top)
+        else:
+            bonus = DeathBonus(block.left, block.top)
+
+        if random_bonus != -1:
+            self.player.bonuses.add(bonus)
+
     def get_bonus(self, block):
         chance = random.random()
         if chance > 0.7:
@@ -450,8 +475,22 @@ class GameOnePlayer:
 
             self.player.bonuses.add(bonus)
 
+    #######################################
+    def listen(self):
+        while True:
+            block = self.q2.get()
+            print(block)
+            self.get_bonus(block)
+
+    def doAction(self):
+        self.q1.put('go')
+        t = Thread(target=self.listen)
+        t.start()
+    ########################################
+
     def remove_blocks(self, blocks_to_remove):
         block = next(iter(blocks_to_remove))
+        self.q1.put(block)
 
         if self.ball.state != common.BallState.Powerful:
             ball = self.ball
@@ -467,7 +506,7 @@ class GameOnePlayer:
         self.level.blocks -= blocks_to_remove
 
         # dodela bonusa (moguca, zavisi od random vrednosti)
-        self.get_bonus(block)
+        #self.get_bonus(block)
 
         # dodela bodova
         self.player.get_score(len(blocks_to_remove))
