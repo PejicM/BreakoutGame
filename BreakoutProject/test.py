@@ -94,7 +94,7 @@ class Window(QWidget):
         self.change_current_widget(self.game_widget)
         self.started = True
 
-        #self.doAction()
+        self.doAction()
         self.timer.start(12)
 
     def restart(self):
@@ -167,7 +167,7 @@ class Window(QWidget):
         self.change_current_widget(self.main_menu)
 
     def quit(self):
-        APP.quit()
+        os._exit(1)
 
     def set_main_menu(self):
         v_box = QVBoxLayout(self.main_menu)
@@ -334,11 +334,11 @@ if __name__ == '__main__':
 
     WINDOW = Window(q1, q2, q3)
 
-    process = Process(target=get_deus_runner, args=[q1])
-    process.start()
+    process1 = Process(target=get_deus_runner, args=[q1])
+    process1.start()
 
-    process = Process(target=get_bonus_runner, args=[q2, q3])
-    process.start()
+    process2 = Process(target=get_bonus_runner, args=[q2, q3])
+    process2.start()
 
     APP.setOverrideCursor(Qt.BlankCursor)
     APP.exec_()
