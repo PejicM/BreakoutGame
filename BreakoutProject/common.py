@@ -33,19 +33,3 @@ class Bonuses(Enum):
     LifeBonus = 4
     DeathBonus = 5
 
-
-def compare(one, other):
-    """function compares two numbers
-    return value: -1 (one < other)
-                  +1 (one > other)"""
-    if one < other:
-        return -1
-    else:
-        return int(one > other)
-
-
-def sign(number):
-    """Function returns sign of number"""
-    if number == 0:
-        return number
-    return int(math.copysign(1, number))
